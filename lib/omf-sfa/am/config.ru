@@ -46,9 +46,11 @@ use Rack::Session::Pool
 require 'omf-sfa/am/am-rest/session_authenticator'
 
 map RPC_URL do
-  require 'omf-sfa/am/am-rpc/am_rpc_service'
+  # require 'omf-sfa/am/am-rpc/am_rpc_service'
+  require 'omf-sfa/am/am-rpc/v3/am_rpc_service'
   require 'builder' # otherwise rack-rpc-0.0.6/lib/rack/rpc/endpoint/xmlrpc.rb:85 raises an uninitialized error message
-  service = OMF::SFA::AM::RPC::AMService.new({:manager => am_mgr, :liaison => am_liaison})
+  # service = OMF::SFA::AM::RPC::AMService.new({:manager => am_mgr, :liaison => am_liaison})
+  service = OMF::SFA::AM::RPC::V3::AMService.new({:manager => am_mgr, :liaison => am_liaison})
 
   app = lambda do |env|
     [404, {"Content-Type" => "text/plain"}, ["Not found"]]
@@ -88,6 +90,33 @@ map "/resources" do
   # account = opts[:am_mgr].get_default_account()  # TODO: Is this still needed?
   # run OMF::SFA::AM::Rest::ResourceHandler.new(opts[:am][:manager], opts.merge({:account => account}))
   run OMF::SFA::AM::Rest::ResourceHandler.new(opts[:am][:manager], opts)
+end
+
+map "/omn-resources" do
+  use OMF::SFA::AM::Rest::SessionAuthenticator, #:expire_after => 10,
+      :login_url => (REQUIRE_LOGIN ? '/login' : nil),
+      :no_session => ['^/$', "^#{RPC_URL}", '^/login', '^/logout', '^/readme', '^/assets'],
+      :am_manager => am_mgr
+  require 'omf-sfa/am/am-rest/resource_handler'
+  run OMF::SFA::AM::Rest::ResourceHandler.new(opts[:am][:manager], opts.merge({ :semantic => true }))
+end
+
+map "/samant" do
+  use OMF::SFA::AM::Rest::SessionAuthenticator, #:expire_after => 10,
+      :login_url => (REQUIRE_LOGIN ? '/login' : nil),
+      :no_session => ['^/$', "^#{RPC_URL}", '^/login', '^/logout', '^/readme', '^/assets'],
+      :am_manager => am_mgr
+  require 'omf-sfa/am/am-rest/samant_handler'
+  run OMF::SFA::AM::Rest::SamantHandler.new(opts[:am][:manager], opts)
+end
+
+map "/admin" do
+  use OMF::SFA::AM::Rest::SessionAuthenticator, #:expire_after => 10,
+      :login_url => (REQUIRE_LOGIN ? '/login' : nil),
+      :no_session => ['^/$', "^#{RPC_URL}", '^/login', '^/logout', '^/readme', '^/assets'],
+      :am_manager => am_mgr
+  require 'omf-sfa/am/am-rest/samant_admin_handler'
+  run OMF::SFA::AM::Rest::SamantAdminHandler.new(opts[:am][:manager], opts)
 end
 
 map "/mapper" do

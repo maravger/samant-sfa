@@ -24,7 +24,7 @@ module OMF::SFA::AM::RPC
     attr_accessor :authorizer
 
     #implement ServiceAPI
-    implement AMServiceAPI
+    implement AMServiceAPI # dimiourgeitai ena hash tupou "API: map #{m.rpc_name} to #{wrapper_name}"
 
 
     def get_version(options = {})
@@ -62,6 +62,7 @@ module OMF::SFA::AM::RPC
 
     def list_resources(credentials, options)
       debug 'ListResources: Options: ', options.inspect
+      debug 'ListResources: Credentials: ', credentials.inspect
 
       only_available = options["geni_available"]
       compressed = options["geni_compressed"]
@@ -82,6 +83,7 @@ module OMF::SFA::AM::RPC
         return @return_struct
       end
 
+      debug "Rack Request " + @request.inspect
       authorizer = OMF::SFA::AM::RPC::AMAuthorizer.create_for_sfa_request(slice_urn, credentials, @request, @manager)
 
       if slice_urn
@@ -360,7 +362,7 @@ module OMF::SFA::AM::RPC
       super
       @manager = opts[:manager]
       @liaison = opts[:liaison]
-      @return_struct = {
+      @return_struct = { # hash
         :code => {
           :geni_code => ""
         },

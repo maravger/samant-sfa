@@ -55,7 +55,7 @@ module OMF::SFA::AM::Rest
 
     def call(env)
       req = ::Rack::Request.new(env)
-      method = req.request_method
+      method = req.request_method # epikoinwnei me to rack interface kai vlepei poia methodos exei zhththei (px GET)
       # sid = nil
       path_info = req.path_info
       #puts "REQUEST(#{self.object_id}): #{path_info}"
@@ -89,12 +89,15 @@ module OMF::SFA::AM::Rest
       # end
 
       if method == 'GET'
+        #debug "Rest Request: " + req.inspect
+        debug "GET REST REQUEST"
         req.session[:authorizer] = AMAuthorizer.create_for_rest_request(env['rack.authenticated'], env['rack.peer_cert'], req.params["account"], @opts[:am_manager])
       elsif method == 'OPTIONS'
         #do nothing for OPTIONS  
       elsif env["REQUEST_PATH"] == '/mapper'
         req.session[:authorizer] = AMAuthorizer.create_for_rest_request(env['rack.authenticated'], env['rack.peer_cert'], req.params["account"], @opts[:am_manager])
       else
+        debug "MISC REST REQUEST"
         body = req.body
         raise EmptyBodyException.new if body.nil?
         (body = body.string) if body.is_a? StringIO
