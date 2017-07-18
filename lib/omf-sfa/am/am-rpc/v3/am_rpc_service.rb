@@ -64,8 +64,12 @@ module OMF::SFA::AM::RPC::V3
                                          :geni_type => 'geni_sfa',
                                          :geni_version => 3,
                                      }],
-          :omf_am => "0.1"
+          :omf_am => "0.1",
+          :hostname => "http://samant.lab.netmode.ntua.gr:443",
+          :urn => "urn:publicid:IDN+omf:netmode+authority+cm",
+          :hrn =>"netmode"
       }
+
       @return_struct[:value].merge!(config[:getversion]) unless config[:getversion].nil?
       @return_struct[:output] = ''
 
