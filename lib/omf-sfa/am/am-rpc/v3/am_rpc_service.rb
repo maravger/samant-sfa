@@ -66,7 +66,7 @@ module OMF::SFA::AM::RPC::V3
                                      }],
           :omf_am => "0.1",
           :hostname => "http://samant.lab.netmode.ntua.gr:443",
-          :urn => "urn:publicid:IDN+omf:netmode+authority+cm",
+          :urn => "urn:publicid:IDN+samant+authority+cm",
           :hrn =>"netmode"
       }
 
