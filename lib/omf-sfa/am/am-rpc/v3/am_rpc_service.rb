@@ -67,7 +67,7 @@ module OMF::SFA::AM::RPC::V3
           :omf_am => "0.1",
           :hostname => "http://samant.lab.netmode.ntua.gr:443",
           :urn => "urn:publicid:IDN+samant+authority+cm",
-          :hrn =>"netmode"
+          :hrn =>"samant"
       }
 
       @return_struct[:value].merge!(config[:getversion]) unless config[:getversion].nil?
