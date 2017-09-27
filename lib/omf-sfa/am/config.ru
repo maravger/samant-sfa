@@ -44,6 +44,7 @@ am_sched.initialize_event_scheduler
 use Rack::Session::Pool
 
 require 'omf-sfa/am/am-rest/session_authenticator'
+require 'omf-sfa/am/am-rest/samant_session_authenticator'
 
 map RPC_URL do
   # require 'omf-sfa/am/am-rpc/am_rpc_service'
@@ -102,7 +103,7 @@ map "/omn-resources" do
 end
 
 map "/samant" do
-  use OMF::SFA::AM::Rest::SessionAuthenticator, #:expire_after => 10,
+  use OMF::SFA::AM::Rest::SamantSessionAuthenticator, #:expire_after => 10,
       :login_url => (REQUIRE_LOGIN ? '/login' : nil),
       :no_session => ['^/$', "^#{RPC_URL}", '^/login', '^/logout', '^/readme', '^/assets'],
       :am_manager => am_mgr

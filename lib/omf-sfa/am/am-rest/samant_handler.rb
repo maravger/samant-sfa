@@ -252,6 +252,7 @@ module OMF::SFA::AM::Rest
       #debug "Body & Format = ", opts.inspect + ", " + format.inspect
       urns = params[:urns]
       rspec = body[:rspec]
+      credentials = body[:credentials]
 
       debug 'Allocate: URNs: ', urns, ' RSPEC: ', rspec, ' Options: ', params.inspect, "time: ", Time.now
 
@@ -277,8 +278,8 @@ module OMF::SFA::AM::Rest
       end
 
       authorizer = options[:req].session[:authorizer]
-      #TODO FIX THIS: probably won't be needed when the credentials will come through myslice
-      raise OMF::SFA::AM::InsufficientPrivilegesException.new unless authorizer.account[:urn] == urns.first
+      # raise OMF::SFA::AM::InsufficientPrivilegesException.new unless authorizer.account[:urn] == urns.first
+      raise OMF::SFA::AM::InsufficientPrivilegesException.new unless credentials[:account][:name] == urns.first
 
       resources = @am_manager.update_samant_resources_from_rspec(rspec, true, authorizer)
       debug "returned resources = " + resources.inspect
@@ -402,8 +403,8 @@ module OMF::SFA::AM::Rest
       debug('Renew ', slice_urn, ' until <', expiration_time, '>')
 
       authorizer = options[:req].session[:authorizer]
-      #TODO FIX THIS: probably won't be needed when the credentials will come through myslice
-      raise OMF::SFA::AM::InsufficientPrivilegesException.new unless authorizer.account[:urn] == urns.first
+      # raise OMF::SFA::AM::InsufficientPrivilegesException.new unless authorizer.account[:urn] == urns.first
+      raise OMF::SFA::AM::InsufficientPrivilegesException.new unless credentials[:account][:name] == urns.first
 
       leases = []
       if slivers_only

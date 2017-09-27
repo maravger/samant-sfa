@@ -60,7 +60,7 @@ module SAMANT
     type RDF::URI.new("http://purl.oclc.org/NET/ssnx/ssn#System")
     # Object Properties
     has_many :hasSubSystem, :predicate => SSN.hasSubSystem, :type => :SensingDevice
-    has_many :hasSubSystem, :predicate => SSN.hasSubSystem, :type => :System
+    # has_many :hasSubSystem, :predicate => SSN.hasSubSystem, :type => :System
     property :isSensorSystemOf, :predicate => SAMANTsensor.isSensorSystemOf, :type => :Uxv
     property :hasHealthStatus, :predicate => SAMANTuxv.hasHealthStatus, :type => :HealthStatus
     # Data Properties
@@ -69,6 +69,8 @@ module SAMANT
     property :hasSerial, :predicate => SAMANTsensor.hasSerial, :type => RDF::XSD.string
     property :hasID, :predicate => SAMANTsensor.hasID, :type => RDF::XSD.string
     property :hasDescription, :predicate => SAMANTsensor.hasDescription, :type => RDF::XSD.string
+    property :consumesPower, :predicate => SAMANTuxv.consumesPower, :type => RDF::XSD.string
+
   end
 
   class FeatureOfInterest < Spira::Base

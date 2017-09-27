@@ -260,8 +260,10 @@ module SAMANT
     property :width, :predicate => SAMANTuxv.width, :type => RDF::XSD.double
     property :height, :predicate => SAMANTuxv.height, :type => RDF::XSD.double
     property :diameter, :predicate => SAMANTuxv.diameter, :type => RDF::XSD.double
-    property :endurance, :predicate => SAMANTuxv.endurance, :type => RDF::XSD.integer
-    property :battery, :predicate => SAMANTuxv.battery, :type => RDF::XSD.integer
+    property :endurance, :predicate => SAMANTuxv.endurance, :type => RDF::XSD.string
+    property :battery, :predicate => SAMANTuxv.battery, :type => RDF::XSD.string
+    property :hasTopSpeed, :predicate => SAMANTuxv.hasTopSpeed, :type => RDF::XSD.string
+    property :hasAvgSpeed, :predicate => SAMANTuxv.hasAvgSpeed, :type => RDF::XSD.string
     property :consumesPower, :predicate => SAMANTuxv.consumesPower, :type => RDF::XSD.string
   end
 
