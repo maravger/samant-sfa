@@ -1228,7 +1228,8 @@ module OMF::SFA::AM
         # Now free any leases owned by this account but not contained in +leases+
         if clean_state
           debug "@@@@CLEAN STATE"
-          all_leases = find_all_samant_leases(authorizer.account.urn, nil, authorizer) # array
+          # all_leases = find_all_samant_leases(authorizer.account.urn, nil, authorizer) # array
+          all_leases = find_all_samant_leases(authorizer.account.urn,[SAMANT::ALLOCATED, SAMANT::PROVISIONED, SAMANT::PENDING] , authorizer) # array
           debug "all leases = " + all_leases.inspect
           unused = all_leases.delete_if do |l|
             out = leases.select {|res| res.uri == l.uri}

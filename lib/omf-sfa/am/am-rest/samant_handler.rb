@@ -170,6 +170,7 @@ module OMF::SFA::AM::Rest
       #debug "Body & Format = ", opts.inspect + ", " + format.inspect
       urns = params[:urns]
       debug 'Describe: URNS: ', urns.inspect, ' Options: ', params.inspect
+      credentials = body[:credentials]
 
       if urns.nil? || urns.empty?
         @return_struct[:code][:geni_code] = 1 # Bad Arguments
@@ -190,6 +191,7 @@ module OMF::SFA::AM::Rest
       end
 
       authorizer = options[:req].session[:authorizer]
+      raise OMF::SFA::AM::InsufficientPrivilegesException.new unless credentials[:account][:name] == urns.first
       # debug authorizer.inspect
       resources = []
       leases = []
@@ -380,6 +382,7 @@ module OMF::SFA::AM::Rest
       #debug "Body & Format = ", opts.inspect + ", " + format.inspect
       urns = params[:urns]
       expiration_time = params[:expiration_time]
+      credentials = body[:credentials]
 
       debug('Renew: URNs: ', urns.inspect, ' until <', expiration_time, '>')
 
@@ -471,6 +474,7 @@ module OMF::SFA::AM::Rest
       #debug "Body & Format = ", opts.inspect + ", " + format.inspect
       urns = params[:urns]
       debug('Status for ', urns.inspect, ' OPTIONS: ', params.inspect)
+      credentials = body[:credentials]
 
       if urns.nil?
         @return_struct[:code][:geni_code] = 1 # Bad Arguments
@@ -488,6 +492,7 @@ module OMF::SFA::AM::Rest
       end
 
       authorizer = options[:req].session[:authorizer]
+      raise OMF::SFA::AM::InsufficientPrivilegesException.new unless credentials[:account][:name] == urns.first
 
       leases = []
       if slivers_only
@@ -535,7 +540,8 @@ module OMF::SFA::AM::Rest
       params = body[:options]
       #debug "Body & Format = ", opts.inspect + ", " + format.inspect
       urns = params[:urns]
-      debug('DeleteSliver: URNS: ', urns.inspect, ' Options: ', options.inspect)
+      debug('DeleteSliver: URNS: ', urns.inspect)
+      credentials = body[:credentials]
 
       slice_urn, slivers_only, error_code, error_msg = parse_samant_urns(urns)
       if error_code != 0
@@ -546,6 +552,7 @@ module OMF::SFA::AM::Rest
       end
 
       authorizer = options[:req].session[:authorizer]
+      raise OMF::SFA::AM::InsufficientPrivilegesException.new unless credentials[:account][:name] == urns.first
 
       value = []
       if slivers_only # NOT SURE IF EVER APPLIED
