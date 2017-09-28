@@ -2,5 +2,14 @@
   "options": {
     "urns": ["urn:publicid:IDN+fed4fire:global:netmode1+slice+samant_test"],
     "expiration_time": "2017-6-22T22:00:00Z"
+  },
+  "credentials": {
+    "account": {
+      "name": "urn:publicid:IDN+fed4fire:global:netmode1+slice+samant_test"
+    },
+    "expires": "2017-10-27T10:12:37Z",
+    "user": {
+      "name": "urn:publicid:IDN+fed4fire:global+user+1993mars"
+    }
   }
 }
