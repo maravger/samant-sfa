@@ -1,47 +1,47 @@
 {
   "resources": {
-    "name": "netmode4",
+    "name": "netmode40",
     "type": "uxv",
     "authority": "samant",
     "resource_description": {
-      "hasComponentID": "urn:publicid:IDN+samant+uxv+netmode4",
+      "hasComponentID": "urn:publicid:IDN+samant+uxv+netmode40",
       "hasSliceID": "urn:publicid:IDN+omf:netmode+account+__default__",
-      "resourceId": "UxV_NETMODE4",
+      "resourceId": "UxV_NETMODE40",
       "hasInterface": [
         {
-          "name": "uav1:wlan110",
+          "name": "uav1:wlan1100",
           "type": "wireless_interface",
           "authority": "samant",
           "resource_description": {
-            "hasComponentID": "urn:publicid:IDN+samant+wireless_interface+uav1:wlan110",
-            "hasComponentName": "uav1:wlan110",
+            "hasComponentID": "urn:publicid:IDN+samant+wireless_interface+uav1:wlan1100",
+            "hasComponentName": "uav1:wlan1100",
             "hasRole": "experimental"
           }
         },
         {
-          "name": "uav1:eth160",
+          "name": "uav1:eth1600",
           "type": "wired_interface",
           "authority": "samant",
           "resource_description": {
-            "hasComponentID": "urn:publicid:IDN+samant+wired_interface+uav1:eth160",
+            "hasComponentID": "urn:publicid:IDN+samant+wired_interface+uav1:eth1600",
             "hasComponentName": "uav1:eth160",
             "hasRole": "experimental"
           }
         }
       ],
       "hasSensorSystem": {
-        "name": "test:system8",
+        "name": "test:system80",
         "type": "system",
         "authority": "samant",
         "resource_description": {
           "hasDescription": "Temperature",
-          "hasProductName": "Testing Sensor 12348",
+          "hasProductName": "Testing Sensor 123480",
           "hasVendorName": "RAWFIE",
-          "hasSerial": "abc1238",
+          "hasSerial": "abc12380",
           "hasHealthStatus": "http://www.semanticweb.org/rawfie/samant/omn-domain-uxv#OK",
           "hasSubSystem": [
             {
-              "name": "test:sensor8",
+              "name": "test:sensor80",
               "type": "sensing_device",
               "authority": "samant",
               "resource_description": {

@@ -499,9 +499,9 @@ module OMF::SFA::AM
           break if lease.nil?
           lease.hasReservationState = SAMANT::PROVISIONED #TODO RECONSIDER IF PROVISIONED
           lease.save
-          lease.isReservationOf map do |resource|
+          lease.isReservationOf.map do |resource|
             resource.hasResourceStatus = SAMANT::BOOKED # PRESENT STATE
-            #resource.hasSliceID = lease.hasSliceID
+            resource.save
           end
         end
       end
@@ -511,10 +511,11 @@ module OMF::SFA::AM
         lease =  SAMANT::Lease.find(:all, :conditions => { :hasID => l_uuid} ).first
         lease.hasReservationState = SAMANT::UNALLOCATED # PAST
         lease.save
-        lease.isReservationOf map do |resource|
+        lease.isReservationOf.map do |resource|
           resource.hasResourceStatus = SAMANT::RELEASED
-          #resource.hasSliceID = "urn:publicid:IDN+omf:netmode+account+__default__"
+          resource.save
         end
+        release_samant_lease(lease)
       end
     end
 
