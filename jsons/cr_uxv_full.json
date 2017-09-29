@@ -1,48 +1,48 @@
 {
   "resources": {
-    "name": "netmode1",
+    "name": "netmode101",
     "type": "uxv",
     "authority": "samant",
     "resource_description": {
-      "hasComponentID": "urn:publicid:IDN+samant+uxv+netmode1",
+      "hasComponentID": "urn:publicid:IDN+samant+uxv+netmode101",
       "hasSliceID": "urn:publicid:IDN+omf:netmode+account+__default__",
-      "resourceId": "UxV_NETMODE1",
+      "resourceId": "UxV_NETMODE100",
       "hasInterface": [
         {
-          "name": "uav1:wlan0",
+          "name": "uav1:wlan101",
           "type": "wireless_interface",
           "authority": "samant",
           "resource_description": {
-            "hasComponentID": "urn:publicid:IDN+samant+wireless_interface+uav1:wlan0",
-            "hasComponentName": "uav1:wlan0",
+            "hasComponentID": "urn:publicid:IDN+samant+wireless_interface+uav1:wlan101",
+            "hasComponentName": "uav1:wlan100",
             "hasRole": "experimental"
           }
         },
         {
-          "name": "uav1:eth0",
+          "name": "uav1:eth101",
           "type": "wired_interface",
           "authority": "samant",
           "resource_description": {
-            "hasComponentID": "urn:publicid:IDN+samant+wired_interface+uav1:eth0",
-            "hasComponentName": "uav1:eth0",
+            "hasComponentID": "urn:publicid:IDN+samant+wired_interface+uav1:eth101",
+            "hasComponentName": "uav1:eth100",
             "hasRole": "experimental"
           }
         }
       ],
       "hasSensorSystem": [
         {
-          "name": "test:system",
+          "name": "test:system12345",
           "type": "system",
           "authority": "samant",
           "resource_description": {
             "hasDescription": "Temperature",
-            "hasProductName": "Testing Sensor 1234",
+            "hasProductName": "Testing Sensor 12345",
             "hasVendorName": "RAWFIE",
-            "hasSerial": "abc123",
+            "hasSerial": "abc1234",
             "hasHealthStatus": "http://www.semanticweb.org/rawfie/samant/omn-domain-uxv#OK",
             "hasSubSystem": [
               {
-                "name": "test:sensor",
+                "name": "test:sensor12345",
                 "type": "sensing_device",
                 "authority": "samant",
                 "resource_description": {

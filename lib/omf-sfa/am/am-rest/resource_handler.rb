@@ -216,7 +216,7 @@ module OMF::SFA::AM::Rest
                            .where([s, RDF::URI.new("http://open-multinet.info/ontology/omn-lifecycle#hasLease"), :o], [:o, RDF::URI.new("http://open-multinet.info/ontology/omn-lifecycle#hasReservationState"), :rs])
                            .filter("?rs != <http://www.semanticweb.org/rawfie/samant/omn-domain-uxv#Cancelled/>") # filter out this kind of leases
                            .filter("?rs != <http://www.semanticweb.org/rawfie/samant/omn-domain-uxv#Pending/>")
-                           .filter("?rs != <http://www.semanticweb.org/rawfie/samant/omn-domain-uxv#Unallocated/>")
+                           .filter("?rs != <http://open-multinet.info/ontology/omn-lifecycle#Unallocated/>")
         output = JSON::LD::Writer.buffer do |writer|
           query_graph.collect { |q|
             writer << q

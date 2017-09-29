@@ -10,22 +10,13 @@
     "leases": [
       {
         "client_id": "test_lease",
-        "valid_from": "2018-6-20T15:58:00Z",
-        "valid_until": "2018-6-21T21:00:00Z"
+        "valid_from": "2017-9-29T09:09:00Z",
+        "valid_until": "2017-9-29T09:11:00Z"
       }
     ],
     "nodes": [
       {
-        "component_id": "urn:publicid:IDN+samant+auv+altus2",
-        "component_manager_id": "urn:publicid:IDN+netmode+node+UaV1",
-        "component_name": "AuV_ALTUS2",
-        "exclusive": true,
-        "lease_ref": "test_lease"
-      },
-      {
-        "component_id": "urn:publicid:IDN+samant+auv+altus3",
-        "component_manager_id": "urn:publicid:IDN+netmode+node+UgV1",
-        "component_name": "AuV_ALTUS3",
+        "component_id": "urn:publicid:IDN+samant+auv+altus1",
         "exclusive": true,
         "lease_ref": "test_lease"
       }
