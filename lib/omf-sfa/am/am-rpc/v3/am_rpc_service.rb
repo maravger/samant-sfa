@@ -658,7 +658,7 @@ module OMF::SFA::AM::RPC::V3
           # debug leases.attribute('valid_until').value
           # debug leases.attribute('client_id').value
 
-          leases_values[:slice_id] = leases.attribute('slice_id').value
+          # leases_values[:slice_id] = leases.attribute('slice_id').value
           leases_values[:valid_from] = leases.attribute('valid_from').value
           leases_values[:valid_until] = leases.attribute('valid_until').value
           leases_values[:client_id] = leases.attribute('client_id').value
