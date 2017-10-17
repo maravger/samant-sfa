@@ -298,9 +298,11 @@ module OMF::SFA::AM::Rest
       if resources.nil? || resources.empty? || leases_only
         debug('Allocate failed', ":all the requested resources were unavailable for the requested DateTime.")
 
-        resources.each do |res|
-          # TODO logika to check tou PENDING xreiazetai stin periptwsi kata tin opoia to lease proupirxe
-          @am_manager.get_scheduler.delete_samant_lease(res) # if res.hasReservationState == SAMANT::PENDING
+        unless resources.nil? || resources.empty?
+          resources.each do |res|
+            # TODO logika to check tou PENDING xreiazetai stin periptwsi kata tin opoia to lease proupirxe
+            @am_manager.get_scheduler.delete_samant_lease(res) # if res.hasReservationState == SAMANT::PENDING
+          end
         end
 
         @return_struct[:code][:geni_code] = 7 # operation refused
