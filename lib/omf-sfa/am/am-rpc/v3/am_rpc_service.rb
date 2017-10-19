@@ -215,6 +215,8 @@ module OMF::SFA::AM::RPC::V3
       debug "call java cmd: " +command_name
       result = `java -jar ./lib/omf-sfa/am/am-rpc/omn_translator/omnlib-jar-with-dependencies.jar -o manifest -i #{filename}`
       debug " translated "
+      result.sub! 'sliver_id', 'component_id'
+      result.sub! 'leaseID', 'id'
       debug result
       result
     end
