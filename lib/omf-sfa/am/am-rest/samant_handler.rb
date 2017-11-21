@@ -134,7 +134,7 @@ module OMF::SFA::AM::Rest
         resources = @am_manager.find_all_samant_leases(nil, $acceptable_lease_states, authorizer)
         comps = @am_manager.find_all_samant_components_for_account(nil, authorizer)
         # child nodes should not be included in listresources
-        comps.delete_if {|c| c.to_uri.to_s.include?"/leased"}
+        comps.delete_if {|c| ((c.nil?)||(c.to_uri.to_s.include?"/leased"))}
         if only_available
           debug "only_available selected"
           # TODO maybe delete also interfaces and locations as well
