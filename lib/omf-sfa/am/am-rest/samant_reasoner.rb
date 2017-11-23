@@ -50,7 +50,7 @@ module OMF::SFA::AM::Rest
       # Transform path to resources
 
       path_ary = Pathname(path).each_filename.to_a
-      # ODO consider changing :resourceId to :hasID *generally*
+      # TODO consider changing :resourceId to :hasID *generally*
       uxv = @am_manager.find_all_samant_resources(["Uxv"], {hasID: path_ary[path_ary.index{|item| item.downcase == "uxv-" + method} + 1]})
       speed = path_ary[path_ary.index{|item| item.downcase == "speed"} + 1].to_i
       sensor_ary = path_ary[(path_ary.index{|item| item.downcase == "sensor"} + 1)]

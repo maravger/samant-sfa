@@ -11,6 +11,7 @@ module SAMANT
   SSN = RDF::Vocabulary.new("http://purl.oclc.org/NET/ssnx/ssn#")
   DUL = RDF::Vocabulary.new("http://www.loa-cnr.it/ontologies/DUL.owl#")
   UNIT = RDF::Vocabulary.new("http://purl.oclc.org/NET/ssnx/qu/unit#")
+  OMNlifecycle = RDF::Vocabulary.new("http://open-multinet.info/ontology/omn-lifecycle#")
 
 
   ##### CLASSES #####
@@ -47,6 +48,8 @@ module SAMANT
     has_many :observes, :predicate => SSN.observes, :type => :QuantityKind
     has_many :hasUnit, :predicate => SAMANTsensor.hasUnit, :type => :Unit
     # Data Properties
+    property :hasComponentID, :predicate => OMNlifecycle.hasComponentID, :type => RDF::XSD.anyURI
+    property :resourceId, :predicate => OMNlifecycle.resourceId, :type => RDF::XSD.string
     property :hasVendorName, :predicate => SAMANTsensor.hasVendorName, :type => RDF::XSD.string
     property :hasProductName, :predicate => SAMANTsensor.hasProductName, :type => RDF::XSD.string
     property :hasSerial, :predicate => SAMANTsensor.hasSerial, :type => RDF::XSD.string
@@ -64,6 +67,8 @@ module SAMANT
     property :isSensorSystemOf, :predicate => SAMANTsensor.isSensorSystemOf, :type => :Uxv
     property :hasHealthStatus, :predicate => SAMANTuxv.hasHealthStatus, :type => :HealthStatus
     # Data Properties
+    property :hasComponentID, :predicate => OMNlifecycle.hasComponentID, :type => RDF::XSD.anyURI
+    property :resourceId, :predicate => OMNlifecycle.resourceId, :type => RDF::XSD.string
     property :hasVendorName, :predicate => SAMANTsensor.hasVendorName, :type => RDF::XSD.string
     property :hasProductName, :predicate => SAMANTsensor.hasProductName, :type => RDF::XSD.string
     property :hasSerial, :predicate => SAMANTsensor.hasSerial, :type => RDF::XSD.string

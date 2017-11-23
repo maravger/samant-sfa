@@ -1,7 +1,8 @@
 {
   "options": {
-    "type": ["wireless_interface"],
+    "type": ["uxv"],
     "description": {
+      "hasUxVType": ["http://www.semanticweb.org/rawfie/samant/omn-domain-uxv#UaV/"]
     }
   }
 }

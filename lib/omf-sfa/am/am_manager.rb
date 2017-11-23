@@ -1203,6 +1203,12 @@ module OMF::SFA::AM
           failed_resources << res if res.kind_of? Hash # ta failarismena einai { failed => resource }
         end
 
+        # Remove nil resources
+        # TODO this shouldn't be a case
+        resources.delete_if {|res|
+          res.nil?
+        }
+
         debug "failed resources = " + failed_resources.inspect
 
         unless failed_resources.empty?
@@ -1223,7 +1229,6 @@ module OMF::SFA::AM
           #return resources
           raise UnavailableResourceException.new "The resources with the following URNs: '#{urns.inspect}' failed to be allocated. Request dropped."
         end
-
 
         # Now free any leases owned by this account but not contained in +leases+
         if clean_state
