@@ -117,12 +117,14 @@ module OMF::SFA::AM::Rest
           urn = OMF::SFA::Model::GURN.create(params[:name], {:type => params[:type], :domain => params[:authority]})
           type = params[:type].camelize
           descr[:hasID] = SecureRandom.uuid # Every resource must have a uuid
+          descr[:hasComponentID] = urn.to_s
+          descr[:resourceId] = params[:name]
           res = eval("SAMANT::#{type}").for(urn, descr) # doesn't save unless you explicitly define so
           unless sparql.ask.whether([res.to_uri, :p, :o]).false?
             raise OMF::SFA::AM::Rest::BadRequestException.new "Resource '#{res.inspect}' already exists."
           end
           authorizer.can_create_resource?(res, type)
-          # debug "Res:" + res.inspect
+          debug "Res:" + res.inspect
           res.save!
         end
         resources << res
@@ -144,12 +146,13 @@ module OMF::SFA::AM::Rest
         gurn = OMF::SFA::Model::GURN.parse(resource[:urn])
         type = gurn.type.camelize
         res = eval("SAMANT::#{type}").for(urn)
-        if res.is_a?SAMANT::Uxv
-          res.hasComponentID = nil # F*ing bug
-          res.save!
-        end
+        debug "res: " + res.inspect
         unless sparql.ask.whether([res.to_uri, :p, :o]).true?
           raise OMF::SFA::AM::Rest::BadRequestException.new "Resource '#{res.inspect}' not found. Please create that first."
+        end
+        if (res.is_a?SAMANT::Uxv)||(res.is_a?SAMANT::Interface)||(res.is_a?SAMANT::System)||(res.is_a?SAMANT::SensingDevice)
+          res.hasComponentID = nil # F*ing bug
+          res.save!
         end
         authorizer.can_release_resource?(res)
         res.destroy!

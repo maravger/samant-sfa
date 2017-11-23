@@ -73,6 +73,7 @@ module SAMANT
     property :isInterfaceOf, :predicate => OMNresource.isInterfaceOf, :type => :Uxv
     # Data Properties
     property :hasID, :predicate => OMNlifecycle.hasID, :type => RDF::XSD.string
+    property :resourceId, :predicate => OMNlifecycle.resourceId, :type => RDF::XSD.string
     property :hasInterfaceType, :predicate => SAMANTuxv.hasInterfaceType, :type => RDF::XSD.string
     property :hasComponentName, :predicate => OMNlifecycle.hasComponentName, :type => RDF::XSD.string
     property :hasComponentID, :predicate => OMNlifecycle.hasComponentID, :type => XSD.anyURI
