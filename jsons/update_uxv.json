@@ -1,11 +1,8 @@
 {
   "resources": {
-    "urn": "urn:publicid:IDN+samant+uxv+netmode40",
+    "urn": "uuid:38c9dbf1-6763-401e-b3b2-0b732883f118",
     "resource_description": {
-      "resourceId": "Netmode1",
-      "hasSliceID": "urn:publicid:IDN+omf:netmode+account+__default__",
-      "where": "urn:publicid:IDN+samant+point3D+NTUA",
-      "hasInterface": ["urn:publicid:IDN+samant+wireless_interface+uav1:wlan0"]
+      "hasReservationState": "http://www.semanticweb.org/rawfie/samant/omn-domain-uxv#Allocated/"
     }
   }
 }

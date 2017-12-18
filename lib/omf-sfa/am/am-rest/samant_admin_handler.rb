@@ -103,7 +103,11 @@ module OMF::SFA::AM::Rest
         descr = create_doctor(descr, authorizer) # Connect the objects first
         if clean_state # update
           urn = params[:urn]
-          type = OMF::SFA::Model::GURN.parse(urn).type.camelize
+          if (urn.start_with?("uuid"))
+            type = "Lease"
+          else
+            type = OMF::SFA::Model::GURN.parse(urn).type.camelize
+          end
           res = eval("SAMANT::#{type}").for(urn)
           unless sparql.ask.whether([res.to_uri, :p, :o]).true?
             raise OMF::SFA::AM::Rest::BadRequestException.new "Resource '#{res.inspect}' not found. Please create that first."
@@ -111,6 +115,9 @@ module OMF::SFA::AM::Rest
           authorizer.can_modify_resource?(res, type)
           res.update_attributes(descr) # Not sure if different than ".for(urn, new_descr)" regarding an already existent urn
         else # create
+          if params[:type] && (params[:type].camelize == "Uxv") && !(descr.keys.find {|k| k.to_s == "hasUxVType"})
+            raise OMF::SFA::AM::Rest::BadRequestException.new "Please provide a UxV type in your description."
+          end
           unless params[:name] && params[:type] && params[:authority]
             raise OMF::SFA::AM::Rest::BadRequestException.new "One of the following mandatory parameters is missing: name, type, authority."
           end
