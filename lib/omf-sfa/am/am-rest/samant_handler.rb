@@ -383,7 +383,7 @@ module OMF::SFA::AM::Rest
       params = body[:options]
       #debug "Body & Format = ", opts.inspect + ", " + format.inspect
       urns = params[:urns]
-      expiration_time = params[:expiration_time]
+      expiration_time = params[:valid_until]
       credentials = body[:credentials]
 
       debug('Renew: URNs: ', urns.inspect, ' until <', expiration_time, '>')
