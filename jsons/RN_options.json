@@ -1,7 +1,7 @@
 {
   "options": {
     "urns": ["urn:publicid:IDN+fed4fire:global:netmode1+slice+samant_test"],
-    "expiration_time": "2019-6-22T22:00:00Z"
+    "valid_until": "2019-6-22T22:00:00Z"
   },
   "credentials": {
     "account": {
