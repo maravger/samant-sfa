@@ -10,8 +10,8 @@
     "leases": [
       {
         "client_id": "test_lease",
-        "valid_from": "2017-11-29T09:09:00Z",
-        "valid_until": "2017-11-29T09:11:00Z"
+        "valid_from": "2018-12-29T09:09:00Z",
+        "valid_until": "2018-12-29T09:11:00Z"
       }
     ],
     "nodes": [
@@ -28,7 +28,7 @@
     },
     "expires": "2017-10-27T10:12:37Z",
     "user": {
-      "name": "urn:publicid:IDN+fed4fire:global+user+1993mars"
+      "name": "urn:publicid:IDN+omf:netmode+user+root"
     }
   }
 }
