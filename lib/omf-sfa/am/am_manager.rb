@@ -1247,6 +1247,8 @@ module OMF::SFA::AM
 
           # Now free any resources owned by this account but not contained in +resources+
           all_components = find_all_samant_components_for_account(authorizer.account.urn, authorizer)
+          # Remove nil components TODO: fix error
+          all_components.delete_if do |comp| comp.nil? end
           unused = all_components.delete_if do |comp|
             out = resources.select {|res| res.uri == comp.uri}
             !out.empty?
