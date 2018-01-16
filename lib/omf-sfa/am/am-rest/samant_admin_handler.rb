@@ -126,6 +126,9 @@ module OMF::SFA::AM::Rest
           descr[:hasID] = SecureRandom.uuid # Every resource must have a uuid
           descr[:hasComponentID] = urn.to_s
           descr[:resourceId] = params[:name]
+          if type == "UxV"
+            descr[:hasSliceID] = "urn:publicid:IDN+omf:netmode+account+__default__" # default slice_id on creation; required on allocation
+          end
           res = eval("SAMANT::#{type}").for(urn, descr) # doesn't save unless you explicitly define so
           unless sparql.ask.whether([res.to_uri, :p, :o]).false?
             raise OMF::SFA::AM::Rest::BadRequestException.new "Resource '#{res.inspect}' already exists."
@@ -199,6 +202,9 @@ module OMF::SFA::AM::Rest
               raise OMF::SFA::AM::Rest::UnsupportedBodyFormatException.new "Invalid URN: " + value.to_s
             end
             descr[key] = eval("SAMANT::#{gurn.type.camelize}").for(gurn.to_s)
+            unless sparql.ask.whether([descr[key].to_uri, :p, :o]).true?
+              raise OMF::SFA::AM::Rest::BadRequestException.new "Resource '#{descr[key].inspect}' not found. Please create that first."
+            end
           elsif value.include? "http" # Instance found, i.e HealthStatus, Resource Status etc
             type = value.split("#").last
             # type = value.split("#").last.chop
