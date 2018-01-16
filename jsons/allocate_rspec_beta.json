@@ -10,13 +10,13 @@
     "leases": [
       {
         "client_id": "test_lease",
-        "valid_from": "2018-12-29T09:09:00Z",
-        "valid_until": "2018-12-29T09:11:00Z"
+        "valid_from": "2019-12-29T09:09:00Z",
+        "valid_until": "2019-12-29T09:11:00Z"
       }
     ],
     "nodes": [
       {
-        "component_id": "urn:publicid:IDN+samant+auv+altus1",
+        "component_id": "urn:publicid:IDN+samant+uxv+klspr345",
         "exclusive": true,
         "lease_ref": "test_lease"
       }
@@ -26,7 +26,7 @@
     "account": {
       "name": "urn:publicid:IDN+fed4fire:global:netmode1+slice+samant_test"
     },
-    "expires": "2017-10-27T10:12:37Z",
+    "expires": "2018-10-27T10:12:37Z",
     "user": {
       "name": "urn:publicid:IDN+omf:netmode+user+root"
     }

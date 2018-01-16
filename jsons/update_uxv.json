@@ -1,11 +1,8 @@
 {
   "resources": {
-    "urn": "urn:publicid:IDN+samant+uxv+netmode40",
+    "urn": "urn:publicid:IDN+samant+uxv+klspr345",
     "resource_description": {
-      "resourceId": "Netmode1",
-      "hasSliceID": "urn:publicid:IDN+omf:netmode+account+__default__",
-      "where": "urn:publicid:IDN+samant+point3D+NTUA",
-      "hasInterface": ["urn:publicid:IDN+samant+wireless_interface+uav1:wlan0"]
+      "hasInterface": ["urn:publicid:IDN+hai+wireless_interface+wizzit_wifi:wlan0asdfasdf"]
     }
   }
 }
