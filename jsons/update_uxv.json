@@ -1,8 +1,14 @@
 {
   "resources": {
+<<<<<<< HEAD
     "urn": "uuid:38c9dbf1-6763-401e-b3b2-0b732883f118",
     "resource_description": {
       "hasReservationState": "http://www.semanticweb.org/rawfie/samant/omn-domain-uxv#Allocated/"
+=======
+    "urn": "urn:publicid:IDN+samant+uxv+klspr345",
+    "resource_description": {
+      "hasInterface": ["urn:publicid:IDN+hai+wireless_interface+wizzit_wifi:wlan0asdfasdf"]
+>>>>>>> omn/wip
     }
   }
 }
