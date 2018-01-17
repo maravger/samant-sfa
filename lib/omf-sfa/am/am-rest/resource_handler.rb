@@ -198,11 +198,15 @@ module OMF::SFA::AM::Rest
       #debug "resources " + resources.inspect
       sparql = SPARQL::Client.new($repository)
       res = []
+
       if resources.kind_of?(Array)
         res_ary = resources
       else
         res_ary = [resources]
       end
+      res_ary.delete_if {|res|
+        res.nil?
+      }
       res_ary.each { |resource|
         query_graph = []
         s = resource.to_uri
