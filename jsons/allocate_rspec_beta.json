@@ -10,13 +10,13 @@
     "leases": [
       {
         "client_id": "test_lease",
-        "valid_from": "2019-12-29T09:09:00Z",
-        "valid_until": "2019-12-29T09:11:00Z"
+        "valid_from": "2018-01-29T09:09:00Z",
+        "valid_until": "2018-01-29T10:11:00Z"
       }
     ],
     "nodes": [
       {
-        "component_id": "urn:publicid:IDN+samant+uxv+klspr345",
+        "component_id": "urn:publicid:IDN+hai+uxv+hai.wizzit.venac.1",
         "exclusive": true,
         "lease_ref": "test_lease"
       }

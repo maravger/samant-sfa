@@ -56,3 +56,6 @@ build-iPhoneSimulator/
 /certs_p12
 /certs_pem
 .idea
+inventory.db
+samant_inventory.db
+test.db
