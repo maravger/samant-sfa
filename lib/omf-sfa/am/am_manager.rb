@@ -1225,6 +1225,7 @@ module OMF::SFA::AM
           end
           # TODO 1.check an prepei na gyrisw nil, 2.prepei na kanw raise to unavailable exception?
           #  Allocate is an all or nothing request: if the aggregate cannot completely satisfy the request RSpec, it should fail the request entirely.
+          debug "Release conflicting resources."
           release_samant_resources(resources, authorizer)
           #return resources
           raise UnavailableResourceException.new "The resources with the following URNs: '#{urns.inspect}' failed to be allocated. Request dropped."

@@ -294,7 +294,9 @@ module OMF::SFA::AM
 
       if samant_component_available?(component, lease.startTime, lease.expirationTime)
         time = Time.now.getutc
-        lease.hasReservationState = time > lease.expirationTime ? SAMANT::CANCELLED : time <= lease.expirationTime && time >= lease.startTime ? SAMANT::PROVISIONED : SAMANT::ALLOCATED
+        # lease.hasReservationState = time > lease.expirationTime ? SAMANT::CANCELLED : time <= lease.expirationTime && time >= lease.startTime ? SAMANT::PROVISIONED : SAMANT::ALLOCATED
+        debug "Lease State Prior = " + lease.hasReservationState.inspect
+        lease.hasReservationState = time > lease.expirationTime ? SAMANT::CANCELLED : time <= lease.expirationTime && time >= lease.startTime ? SAMANT::PENDING : SAMANT::PENDING
         debug "Lease State = " + lease.hasReservationState.inspect
         unless parent.hasLease.include? lease
           debug "@@@ALLOCATION MODE"
@@ -479,8 +481,16 @@ module OMF::SFA::AM
           Spira.repository = RDF::Sesame::Repository.new(url)
           lease = SAMANT::Lease.find(:all, :conditions => { :hasID => l_uuid} ).first
           break if lease.nil?
-          lease.hasReservationState = SAMANT::PROVISIONED #TODO RECONSIDER IF PROVISIONED
-          lease.save
+          if lease.hasReservationState.uri == SAMANT::ALLOCATED.uri || lease.hasReservationState.uri == SAMANT::PROVISIONED.uri
+            lease.hasReservationState = SAMANT::PROVISIONED #TODO RECONSIDER IF PROVISIONED
+            lease.save
+            lease.isReservationOf.map do |resource|
+              resource.hasResourceStatus = SAMANT::BOOKED # PRESENT STATE
+              resource.save
+            end
+          else
+            release_samant_lease(lease)
+          end
           # not sure if bug
           #url = "http://dtnmode3.lab.netmode.ntua.gr:8080/openrdf-sesame/repositories/samRemote"
           #Spira.repository = RDF::Sesame::Repository.new(url)
@@ -497,11 +507,15 @@ module OMF::SFA::AM
           Spira.repository = RDF::Sesame::Repository.new(url)
           lease = SAMANT::Lease.find(:all, :conditions => { :hasID => l_uuid} ).first
           break if lease.nil?
-          lease.hasReservationState = SAMANT::PROVISIONED #TODO RECONSIDER IF PROVISIONED
-          lease.save
-          lease.isReservationOf.map do |resource|
-            resource.hasResourceStatus = SAMANT::BOOKED # PRESENT STATE
-            resource.save
+          if lease.hasReservationState.uri == SAMANT::ALLOCATED.uri || lease.hasReservationState.uri == SAMANT::PROVISIONED.uri
+            lease.hasReservationState = SAMANT::PROVISIONED #TODO RECONSIDER IF PROVISIONED
+            lease.save
+            lease.isReservationOf.map do |resource|
+              resource.hasResourceStatus = SAMANT::BOOKED # PRESENT STATE
+              resource.save
+            end
+          else
+            release_samant_lease(lease)
           end
         end
       end

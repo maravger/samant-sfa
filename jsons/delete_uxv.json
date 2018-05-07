@@ -1,5 +1,10 @@
 {
-  "resources": {
-    "urn": "urn:publicid:IDN+samant+wired_interface+uxv.uav.venac11111:eth0"
-  }
+  "resources": [
+    {
+      "urn": "urn:publicid:IDN+samant+uxv+netmode1_pal/leased@2018-05-0710:47:10UTC"
+    },
+    {
+      "urn": "urn:publicid:IDN+samant+uxv+klspr345678/leased@2018-05-0710:47:14UTC"
+    }
+  ]
 }

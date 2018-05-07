@@ -25,6 +25,8 @@ module OMF::SFA::AM::Rest
         opts[:resource_uri] = :update
       elsif path.map(&:downcase).include? "delete"
         opts[:resource_uri] = :delete
+      elsif path.map(&:downcase).include? "change_state"
+        opts[:resource_uri] = :change_state
       else
         raise OMF::SFA::AM::Rest::BadRequestException.new "Invalid URL."
       end
@@ -51,11 +53,17 @@ module OMF::SFA::AM::Rest
 
     def on_put (method, options)
       body, format = parse_body(options)
-      res_el = body[:resources]
-      authorizer = options[:req].session[:authorizer]
-      resources = create_or_update(res_el, true, authorizer)
-      resp = OMF::SFA::AM::Rest::ResourceHandler.omn_response_json(resources, options)
-      return ['application/json', JSON.pretty_generate(resp)]
+      if method == :change_state
+        resources = body[:resources]
+        resp = change_state(resources)
+        return ['application/json', JSON.pretty_generate(resp)]
+      else
+        res_el = body[:resources]
+        authorizer = options[:req].session[:authorizer]
+        resources = create_or_update(res_el, true, authorizer)
+        resp = OMF::SFA::AM::Rest::ResourceHandler.omn_response_json(resources, options)
+        return ['application/json', JSON.pretty_generate(resp)]
+      end
     end
 
     def on_delete (method, options)
@@ -126,7 +134,7 @@ module OMF::SFA::AM::Rest
           descr[:hasID] = SecureRandom.uuid # Every resource must have a uuid
           descr[:hasComponentID] = urn.to_s
           descr[:resourceId] = params[:name]
-          if type == "UxV"
+          if type.downcase == "uxv"
             descr[:hasSliceID] = "urn:publicid:IDN+omf:netmode+account+__default__" # default slice_id on creation; required on allocation
           end
           res = eval("SAMANT::#{type}").for(urn, descr) # doesn't save unless you explicitly define so
@@ -166,8 +174,8 @@ module OMF::SFA::AM::Rest
         end
         authorizer.can_release_resource?(res)
         res.destroy!
-        return {:response => "Resource Successfully Deleted"}
       end
+      return {:response => "Resource(s) Successfully Deleted"}
     end
 
     # Connect instances before creating/updating
@@ -252,6 +260,39 @@ module OMF::SFA::AM::Rest
       end
       debug "New descr contains: " + descr.inspect
       return descr, find_with_array_hash
+    end
+
+    # Change Lease state
+
+    def change_state(resources)
+      debug "I'm in change state!"
+      unless resources.is_a?(Array)
+        resources = [resources]
+      end
+      resources.each do |resource|
+        uuid = resource[:urn]
+        if ["ALLOCATED", "CANCELLED"].include? resource[:state].upcase
+          state = eval("SAMANT::#{resource[:state].upcase}")
+        end
+        l_uuid = uuid.gsub("uuid:", "")
+        debug "Looking for Lease with uuid: " + l_uuid
+        url = "http://147.102.22.105:8080/openrdf-sesame/repositories/samRemote"
+        Spira.repository = RDF::Sesame::Repository.new(url)
+        lease = SAMANT::Lease.find(:all, :conditions => { :hasID => l_uuid} ).first
+        if lease.nil?
+          return {:response => "Lease Not Found"}
+        end
+        lease.hasReservationState = state
+        lease.save
+        lease.isReservationOf.map do |resource|
+          lease.hasReservationState.uri == SAMANT::ALLOCATED.uri ? resource.hasResourceStatus = SAMANT::BOOKED : resource.hasResourceStatus = SAMANT::RELEASED # PRESENT STATE
+          resource.save
+        end
+        if lease.hasReservationState.uri == SAMANT::CANCELLED
+          @am_manager.get_scheduler.release_samant_lease(lease)
+        end
+      end
+      return {:response => "Lease(s) State Updated Successfully"}
     end
 
   end
