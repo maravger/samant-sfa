@@ -16,12 +16,12 @@
     ],
     "nodes": [
       {
-        "component_id": "urn:publicid:IDN+samant+uxv+netmode1_pal",
+        "component_id": "urn:publicid:IDN+samant+uav+flexus1",
         "exclusive": true,
         "lease_ref": "test_lease"
       },
       {
-        "component_id": "urn:publicid:IDN+samant+uxv+klspr345678",
+        "component_id": "urn:publicid:IDN+samant+auv+altus1",
         "exclusive": true,
         "lease_ref": "test_lease"
       }

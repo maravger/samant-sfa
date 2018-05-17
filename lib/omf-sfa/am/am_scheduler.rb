@@ -9,7 +9,7 @@ require 'rdf/do'
 require 'do_sqlite3'
 #$repository = Spira.repository = RDF::DataObjects::Repository.new uri: "sqlite3:./test.db"
 #url = "http://127.0.0.1:8080/openrdf-sesame/repositories/remote/"
-url = "http://147.102.22.105:8080/openrdf-sesame/repositories/samRemote"
+url = "http://147.102.22.105:8080/openrdf-sesame/repositories/samRemoteClean"
 $repository = Spira.repository = RDF::Sesame::Repository.new(url)
 require_relative '../samant_models/sensor.rb'
 require_relative '../samant_models/uxv.rb'
@@ -477,7 +477,7 @@ module OMF::SFA::AM
       if t_now >= lease.startTime # the lease is active - create only the on_lease_end event
         @event_scheduler.in('0.1s', tag: "#{l_uuid}_start") do # praktika ksekina to twra
           #TODO RECONSIDER
-          url = "http://147.102.22.105:8080/openrdf-sesame/repositories/samRemote"
+          url = "http://147.102.22.105:8080/openrdf-sesame/repositories/samRemoteClean"
           Spira.repository = RDF::Sesame::Repository.new(url)
           lease = SAMANT::Lease.find(:all, :conditions => { :hasID => l_uuid} ).first
           break if lease.nil?
@@ -503,7 +503,7 @@ module OMF::SFA::AM
         #raise OMF::SFA::AM::AMManagerException.new 'Lease start time cannot be past.'
       else
         @event_scheduler.at(lease.startTime.to_s, tag: "#{l_uuid}_start") do # TOTE POU LEEI TO STARTTIME THA TA KANEI OLA AUTA
-          url = "http://147.102.22.105:8080/openrdf-sesame/repositories/samRemote"
+          url = "http://147.102.22.105:8080/openrdf-sesame/repositories/samRemote/Clean"
           Spira.repository = RDF::Sesame::Repository.new(url)
           lease = SAMANT::Lease.find(:all, :conditions => { :hasID => l_uuid} ).first
           break if lease.nil?
@@ -520,7 +520,7 @@ module OMF::SFA::AM
         end
       end
       @event_scheduler.at(lease.expirationTime.to_s, tag: "#{l_uuid}_end") do # stamata to tote
-        url = "http://147.102.22.105:8080/openrdf-sesame/repositories/samRemote"
+        url = "http://147.102.22.105:8080/openrdf-sesame/repositories/samRemote/Clean"
         Spira.repository = RDF::Sesame::Repository.new(url)
         lease =  SAMANT::Lease.find(:all, :conditions => { :hasID => l_uuid} ).first
         lease.hasReservationState = SAMANT::UNALLOCATED # PAST
