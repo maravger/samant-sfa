@@ -62,7 +62,8 @@ Next you have to install the openrdf-sesame adaptor:
 
 	$ wget https://netix.dl.sourceforge.net/project/sesame/Sesame%204/4.1.2/openrdf-sesame-4.1.2-sdk.tar.gz
 
-Unzip the folder and deploy the openrdf-sesame.war and openrdf-workbench.war, located in the  openrdf-sesame-4.1.2/war folder. For the deployment you may use Apache Tomcat or any other known alternative of your choice.
+Unzip the folder and deploy the openrdf-sesame.war and openrdf-workbench.war, located in the  openrdf-sesame-4.1.2/war folder. For the deployment you may use Apache Tomcat or any other known alternative of your choice
+(for the Apache Tomcat, deploying involves copying the .war files in the /webapps folder and starting the server).
 
 Now you are ready to deploy the Semantic Graph Database. Request a copy of GraphDB 8 from here: 
 
@@ -73,15 +74,50 @@ Unfortunately we can not provide you with a direct download link, but one will b
 When the download has finished, it is time to run the GraphDB instance. After unziping it,navigate to the downloaded folder and execute the following script.
 
 	$ cd /bin
-	$./graphdb
+	$ ./graphdb -d -Xms10g -Xmx10g -p ~/pid
 
-The GraphDB Workbench is available at port 7200 of your machine. Visit localhost:7200 and create a new repository with the default settings. Then, visit the openrdf-workbench (location depending on where the adapter is deployed) and create a New repository. In the dropdown list, select the "Remote RDF Store" option. After clicking "Next" you will be prompted to specify the "Sesame server locations". Use the url of the GraphDB Workbench(http://localhost:7200). For ID and Title use "remote". For the "Remote repository ID" use the name of the repository you created with the GraphDB Workbench and then click "Create".
+The GraphDB Workbench is available at port 7200 of your machine. Then you will have to create a new repository. 
+Download the default configuration file:
+ 
+    $ wget http://graphdb.ontotext.com/free/_downloads/repo-config.ttl
 
-Now you should import the respective Ontologies. Firstly, download the Ontologies from 
+Change the repositoryID field to your liking and issue the following command:
 
-	http://samant.lab.netmode.ntua.gr/documents 
+    $ curl -X POST http://0.0.0.0:7200/rest/repositories -H 'Content-Type: multipart/form-data' -F "config=@repo-config.ttl"
 
-Again, visit the GraphDB Workbench and click "Import" -> "RDF" -> "Local Files" and upload both of the downloaded files.
+Now you should import the respective Ontologies. Firstly, download them, in your home repository, like this: 
+
+	$ wget http://samant.lab.netmode.ntua.gr/omn-domain-sensor_v_2_0.ttl.txt
+	$ wget http://samant.lab.netmode.ntua.gr/omn-domain-uxv_v_2_0.ttl.txt
+	
+Next you have to import the ontologies into the newly created repository, but first you have to kill the running graphdb instance. For this purpose issue the following commands:
+
+    $ kill "$(cat ~/pid)"
+    $ ./loadrdf -f -i localSAM -v -m parallel ~/omn-domain-sensor_v_2_0.ttl ~/omn-domain-uxv_v_2_0.ttl
+    $ ./graphdb -d -Xms10g -Xmx10g -p ~/pid
+
+The semantic repository is ready! You can see your newly created repo at localhost:7200. 
+
+Now it's time to deploy the sesame adapter. Navigate to the /bin folder of your tomcat installation and issue the following commands:
+
+    $ ./startup.sh
+      
+Navigate to the /bin folder of the /openrdf-sesame directory and run the following:
+
+    $ ./console.sh
+    > connect http://localhost:8080/openrdf-sesame
+    > create remote
+    
+and specify the variables as in the following:
+
+    Please specify values for the following variables:
+    Sesame server location [http://localhost:8080/openrdf-sesame]: http://localhost:7200/
+    Remote repository ID [SYSTEM]: <graphdbrepositoryID>*
+    Local repository ID [SYSTEM@localhost]: remoteSAM
+    Repository title [SYSTEM repository @localhost]: remoteSAM
+    Repository created
+    
+*Remember to change the <graphdbrepositoryID> according the one you provided above.
 
 Congratulations, your repository is now created and connected to the adapter!
 
@@ -163,6 +199,10 @@ Starting a Test SAM
 To start a SAM instance (at port 443) from this directory, run the following:
 
     $ cd $OMF_SFA_HOME
+    $ bundle exec ruby -I lib lib/omf-sfa/am/am_server.rb start
+
+for the default 8001 port, or the following for the 443 port   
+
     $ rvmsudo bundle exec ruby -I lib lib/omf-sfa/am/am_server.rb start -p 443
 
 which should result into something like:
@@ -210,8 +250,6 @@ A json file that describes the resources is required. This file can contain eith
 	    "type": "uxv",
 	    "authority": "samant",
 	    "resource_description": {
-	      "hasComponentID": "urn:publicid:IDN+samant+uxv+netmode1",
-	      "hasSliceID": "urn:publicid:IDN+omf:netmode+account+__default__",
 	      "resourceId": "UxV_NETMODE1",
 	      "hasInterface": [
 	        {
@@ -219,7 +257,6 @@ A json file that describes the resources is required. This file can contain eith
 	          "type": "wireless_interface",
 	          "authority": "samant",
 	          "resource_description": {
-	            "hasComponentID": "urn:publicid:IDN+samant+wireless_interface+uav1:wlan0",
 	            "hasComponentName": "uav1:wlan0",
 	            "hasRole": "experimental"
 	          }
@@ -229,7 +266,6 @@ A json file that describes the resources is required. This file can contain eith
 	          "type": "wired_interface",
 	          "authority": "samant",
 	          "resource_description": {
-	            "hasComponentID": "urn:publicid:IDN+samant+wired_interface+uav1:eth0",
 	            "hasComponentName": "uav1:eth0",
 	            "hasRole": "experimental"
 	          }

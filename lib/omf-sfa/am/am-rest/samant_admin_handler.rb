@@ -276,7 +276,7 @@ module OMF::SFA::AM::Rest
         end
         l_uuid = uuid.gsub("uuid:", "")
         debug "Looking for Lease with uuid: " + l_uuid
-        url = "http://147.102.22.105:8080/openrdf-sesame/repositories/samRemoteClean"
+        url = "http://localhost:8080/openrdf-sesame/repositories/remoteSAM"
         Spira.repository = RDF::Sesame::Repository.new(url)
         lease = SAMANT::Lease.find(:all, :conditions => { :hasID => l_uuid} ).first
         if lease.nil?
