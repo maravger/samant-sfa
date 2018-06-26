@@ -8,6 +8,13 @@ module OMF::SFA::AM::Rest
     @@ip_whitelist = ['127.0.0.1'].freeze
 
     def find_handler(path, opts)
+      @return_struct = { # hash
+                        :code => {
+                            :geni_code => ""
+                        },
+                        :value => '',
+                        :output => ''
+      }
       debug "!!!ADMIN handler!!!"
       remote_ip = opts[:req].env["REMOTE_ADDR"]
       debug "Trying to connect from >>>>> " + remote_ip
@@ -266,6 +273,7 @@ module OMF::SFA::AM::Rest
 
     def change_state(resources)
       debug "I'm in change state!"
+      value = {}
       unless resources.is_a?(Array)
         resources = [resources]
       end
@@ -280,19 +288,33 @@ module OMF::SFA::AM::Rest
         Spira.repository = RDF::Sesame::Repository.new(url)
         lease = SAMANT::Lease.find(:all, :conditions => { :hasID => l_uuid} ).first
         if lease.nil?
-          return {:response => "Lease Not Found"}
+          @return_struct[:code][:geni_code] = 12 # Search Failed
+          @return_struct[:output] = "Lease not found!"
+          @return_struct[:value] = ''
+          return ['application/json', JSON.pretty_generate(@return_struct)]
         end
         lease.hasReservationState = state
         lease.save
         lease.isReservationOf.map do |resource|
-          lease.hasReservationState.uri == SAMANT::ALLOCATED.uri ? resource.hasResourceStatus = SAMANT::BOOKED : resource.hasResourceStatus = SAMANT::RELEASED # PRESENT STATE
+          lease.hasReservationState.uri == SAMANT::ALLOCATED.uri ? resource.hasResourceStatus =
+              SAMANT::BOOKED : resource.hasResourceStatus = SAMANT::RELEASED # PRESENT STATE
           resource.save
         end
         if lease.hasReservationState.uri == SAMANT::CANCELLED
           @am_manager.get_scheduler.release_samant_lease(lease)
         end
+        tmp = {}
+        tmp[:geni_sliver_urn]         = lease.to_uri.to_s
+        tmp[:geni_expires]            = lease.expirationTime.to_s
+        tmp[:geni_allocation_status]  = if lease.hasReservationState.uri == SAMANT::ALLOCATED.uri then "geni_allocated"
+                                        else "geni_unallocated"
+                                        end
+        value[:geni_slivers] << tmp
       end
-      return {:response => "Lease(s) State Updated Successfully"}
+      @return_struct[:code][:geni_code] = 0
+      @return_struct[:value] = value
+      @return_struct[:output] = ''
+      return ['application/json', JSON.pretty_generate(@return_struct)]
     end
 
   end
