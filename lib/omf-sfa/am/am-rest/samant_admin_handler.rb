@@ -274,6 +274,7 @@ module OMF::SFA::AM::Rest
     def change_state(resources)
       debug "I'm in change state!"
       value = {}
+      value[:geni_slivers] = []
       unless resources.is_a?(Array)
         resources = [resources]
       end
