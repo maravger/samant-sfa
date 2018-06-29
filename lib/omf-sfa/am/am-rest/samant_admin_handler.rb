@@ -63,7 +63,7 @@ module OMF::SFA::AM::Rest
       if method == :change_state
         resources = body[:resources]
         resp = change_state(resources)
-        return ['application/json', JSON.pretty_generate(resp)]
+        # return ['application/json', JSON.pretty_generate(resp)]
       else
         res_el = body[:resources]
         authorizer = options[:req].session[:authorizer]
