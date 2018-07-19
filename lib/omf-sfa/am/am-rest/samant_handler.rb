@@ -567,7 +567,7 @@ module OMF::SFA::AM::Rest
           value << tmp
         end
       else
-        leases = @am_manager.find_all_samant_leases(slice_urn, [SAMANT::ALLOCATED, SAMANT::PROVISIONED], authorizer)
+        leases = @am_manager.find_all_samant_leases(slice_urn, [SAMANT::ALLOCATED, SAMANT::PENDING], authorizer)
         debug "leases = " + leases.inspect
         if leases.nil? || leases.empty?
           @return_struct[:code][:geni_code] = 1 # Bad Arguments

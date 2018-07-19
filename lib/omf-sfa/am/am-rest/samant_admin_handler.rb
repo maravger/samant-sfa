@@ -282,6 +282,11 @@ module OMF::SFA::AM::Rest
         uuid = resource[:urn]
         if ["ALLOCATED", "CANCELLED"].include? resource[:state].upcase
           state = eval("SAMANT::#{resource[:state].upcase}")
+        else
+          @return_struct[:code][:geni_code] = 12 # Search Failed
+          @return_struct[:output] = "Unkown state provided"
+          @return_struct[:value] = ''
+          return ['application/json', JSON.pretty_generate(@return_struct)]
         end
         l_uuid = uuid.gsub("uuid:", "")
         debug "Looking for Lease with uuid: " + l_uuid
@@ -291,6 +296,12 @@ module OMF::SFA::AM::Rest
         if lease.nil?
           @return_struct[:code][:geni_code] = 12 # Search Failed
           @return_struct[:output] = "Lease not found!"
+          @return_struct[:value] = ''
+          return ['application/json', JSON.pretty_generate(@return_struct)]
+        end
+        if lease.hasReservationState.uri == SAMANT::CANCELLED.uri
+          @return_struct[:code][:geni_code] = 12 # Search Failed
+          @return_struct[:output] = "Cannot change cancelled lease!"
           @return_struct[:value] = ''
           return ['application/json', JSON.pretty_generate(@return_struct)]
         end
