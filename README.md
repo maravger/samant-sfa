@@ -114,7 +114,7 @@ and specify the variables as in the following:
     Sesame server location [http://localhost:8080/openrdf-sesame]: http://localhost:7200/
     Remote repository ID [SYSTEM]: <graphdbrepositoryID>*
     Local repository ID [SYSTEM@localhost]: remoteSAM
-    Repository title [SYSTEM repository @localhost]: remoteSAM
+    Repository title [SYSTEM repository @localhost]: samRemoteClean
     Repository created
     
 *Remember to change the <graphdbrepositoryID> according the one you provided above.
@@ -182,7 +182,7 @@ copy something that looks like this
 
 and paste inside.
 
-Repeat this process for the am.pem certificate (am.pem and am_key.pem). Also copy the am certificate to trusted_roots folder.
+Repeat this process for the am.pem certificate (am.pem and am.pkey). Also copy the am certificate to trusted_roots folder.
 	
 	$ cp am.pem ~/.omf/trusted_roots
 
@@ -278,11 +278,11 @@ A json file that describes the resources is required. This file can contain eith
 
 To populate the database with the resources:
 
-	$ curl --cert user_cert.pem --key user_cert.pkey -i -H "Accept: application/json" -H "Content-Type:application/json" -X POST-d @jsons/cr_uxv.json -k https://localhost:443/admin/create
+	$ curl --cert user_cert.pem --key user_cert.pkey -i -H "Accept: application/json" -H "Content-Type:application/json" -X POST -d @jsons/cr_uxv.json -k https://localhost:443/admin/create
 
 Now let's use the REST interface again to see the data we created:
 
-	$ curl --cert user_cert.pem --key user_cert.pkey -i -H "Accept: application/json" -H "Content-Type:application/json" -X GET d @jsons/get_inf.json -k https://localhost:443/admin/getinfo
+	$ curl --cert user_cert.pem --key user_cert.pkey -i -H "Accept: application/json" -H "Content-Type:application/json" -X GET -d @jsons/get_inf.json -k https://localhost:443/admin/getinfo
 
 
 Testing REST API
