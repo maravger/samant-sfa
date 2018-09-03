@@ -16,12 +16,7 @@
     ],
     "nodes": [
       {
-        "component_id": "urn:publicid:IDN+samant+uav+flexus1",
-        "exclusive": true,
-        "lease_ref": "test_lease"
-      },
-      {
-        "component_id": "urn:publicid:IDN+samant+auv+altus1",
+        "component_id": "urn:publicid:IDN+samant+ugv+altus1",
         "exclusive": true,
         "lease_ref": "test_lease"
       }

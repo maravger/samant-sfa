@@ -1,10 +1,19 @@
 {
   "resources": [
     {
-      "urn": "urn:publicid:IDN+samant+uxv+netmode1_pal/leased@2018-05-0710:47:10UTC"
+      "urn": "urn:publicid:IDN+hai+Uxv+hai.wizzit.venac.6/leased@2018-06-2205:16:10UTC"
     },
     {
-      "urn": "urn:publicid:IDN+samant+uxv+klspr345678/leased@2018-05-0710:47:14UTC"
+      "urn": "urn:publicid:IDN+hai+Uxv+hai.wizzit.venac.6/leased@2018-06-2205:22:50UTC"
+    },
+    {
+      "urn": "urn:publicid:IDN+hai+Uxv+hai.wizzit.venac.5/leased@2018-06-2605:17:41UTC"
+    },
+    {
+      "urn": "urn:publicid:IDN+hai+Uxv+hai.wizzit.venac.5/leased@2018-07-1912:02:09UTC"
+    },
+    {
+      "urn": "urn:publicid:IDN+hai+Uxv+hai.wizzit.venac.5/leased@2018-07-1913:36:42UTC"
     }
   ]
 }

@@ -1,8 +1,8 @@
 {
   "resources": {
-    "urn": "urn:publicid:IDN+samant+uxv+klspr345",
+    "urn": "urn:publicid:IDN+hai+Uxv+hai.wizzit.venac.5",
     "resource_description": {
-       "hasInterface": []
+       "hasResourceStatus": "http://www.semanticweb.org/rawfie/samant/omn-domain-uxv#Released/"
     }
   }
 }
