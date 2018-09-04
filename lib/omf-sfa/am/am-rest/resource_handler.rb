@@ -210,13 +210,15 @@ module OMF::SFA::AM::Rest
       res_ary.each { |resource|
         query_graph = []
         s = resource.to_uri
-        query_graph << sparql.construct([s, :p, :o])
+        s_stripped = RDF::URI.new(s.to_s.split('/').shift)
+        # debug "stripped: " + s_stripped
+        query_graph << sparql.construct([s_stripped, :p, :o])
                           .where([s, :p, :o])
                           .filter("?p !=  <http://www.semanticweb.org/rawfie/samant/omn-domain-uxv#hasChild>") # do not show hasChild predicates
                           .filter("?p !=  <http://www.semanticweb.org/rawfie/samant/omn-domain-uxv#hasParent>") # do not show hasParent predicates
                           .filter("!regex (str(?o), \"leased@\")")
                           .filter("?p != <http://open-multinet.info/ontology/omn-lifecycle#hasLease>") # treat leases specifically, beneath
-        query_graph << sparql.construct([s, RDF::URI.new("http://open-multinet.info/ontology/omn-lifecycle#hasLease"), :o])
+        query_graph << sparql.construct([s_stripped, RDF::URI.new("http://open-multinet.info/ontology/omn-lifecycle#hasLease"), :o])
                            .where([s, RDF::URI.new("http://open-multinet.info/ontology/omn-lifecycle#hasLease"), :o], [:o, RDF::URI.new("http://open-multinet.info/ontology/omn-lifecycle#hasReservationState"), :rs])
                            .filter("?rs != <http://www.semanticweb.org/rawfie/samant/omn-domain-uxv#Cancelled/>") # filter out this kind of leases
                            .filter("?rs != <http://www.semanticweb.org/rawfie/samant/omn-domain-uxv#Pending/>")

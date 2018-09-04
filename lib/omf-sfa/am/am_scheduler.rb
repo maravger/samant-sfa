@@ -9,7 +9,7 @@ require 'rdf/do'
 require 'do_sqlite3'
 #$repository = Spira.repository = RDF::DataObjects::Repository.new uri: "sqlite3:./test.db"
 #url = "http://127.0.0.1:8080/openrdf-sesame/repositories/remote/"
-url = "http://localhost:8080/openrdf-sesame/repositories/samRemoteClean"
+url = "http://147.102.22.105:8080/openrdf-sesame/repositories/samRemoteClean"
 $repository = Spira.repository = RDF::Sesame::Repository.new(url)
 require_relative '../samant_models/sensor.rb'
 require_relative '../samant_models/uxv.rb'
