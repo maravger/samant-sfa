@@ -348,7 +348,7 @@ module OMF::SFA::AM::Rest
                                         [RDF::URI.new(hw1), RDF::URI.new("http://www.w3.org/2000/01/rdf-schema#label"), :o])
                              .where([rsc_uri, RDF::URI.new("http://open-multinet.info/ontology/omn-lifecycle#resourceId"), :o],
                                     [rsc_uri, :p, RDF::URI.new("http://www.semanticweb.org/rawfie/samant/omn-domain-uxv#UxV")])
-        if rsc.hasSensorSystem
+        if (rsc.kind_of?SAMANT::Uxv) && rsc.hasSensorSystem
           global_writer << sparql
                                .construct([RDF::URI.new(hw2), RDF::URI.new("http://www.w3.org/1999/02/22-rdf-syntax-ns#type"), RDF::URI.new("http://open-multinet.info/ontology/omn-resource#HardwareType")],
                                           [RDF::URI.new(hw2), RDF::URI.new("http://www.w3.org/2000/01/rdf-schema#label"), :o],
