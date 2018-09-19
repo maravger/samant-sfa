@@ -290,7 +290,6 @@ module OMF::SFA::AM::Rest
                                 [RDF::URI.new(uuid), RDF::URI.new("http://open-multinet.info/ontology/omn#hasResource"), resource_fix],
                                 [resource_fix, RDF::URI.new("http://open-multinet.info/ontology/omn#isResourceOf"), RDF::URI.new(uuid)],
                                 [resource_fix, RDF::URI.new("http://open-multinet.info/ontology/omn-resource#hasHardwareType"), RDF::URI.new(hw1)],
-                                [resource_fix, RDF::URI.new("http://open-multinet.info/ontology/omn-resource#hasHardwareType"), RDF::URI.new(hw2)],
                                 [resource_fix, RDF::URI.new("http://open-multinet.info/ontology/omn-lifecycle#managedBy"), RDF::URI.new("urn:uuid:DUMMY_AUTHORITY")],
                                 [RDF::URI.new("urn:uuid:DUMMY_AUTHORITY"), RDF::URI.new("http://www.w3.org/1999/02/22-rdf-syntax-ns#type"), RDF::URI.new("http://open-multinet.info/ontology/omn-domain-geni-fire#AMService")])
                      .where([rsc_uri, :p, RDF::URI.new("http://www.semanticweb.org/rawfie/samant/omn-domain-uxv#UxV")])
@@ -349,13 +348,17 @@ module OMF::SFA::AM::Rest
                                         [RDF::URI.new(hw1), RDF::URI.new("http://www.w3.org/2000/01/rdf-schema#label"), :o])
                              .where([rsc_uri, RDF::URI.new("http://open-multinet.info/ontology/omn-lifecycle#resourceId"), :o],
                                     [rsc_uri, :p, RDF::URI.new("http://www.semanticweb.org/rawfie/samant/omn-domain-uxv#UxV")])
-        global_writer << sparql
-                             .construct([RDF::URI.new(hw2), RDF::URI.new("http://www.w3.org/1999/02/22-rdf-syntax-ns#type"), RDF::URI.new("http://open-multinet.info/ontology/omn-resource#HardwareType")],
-                                        [RDF::URI.new(hw2), RDF::URI.new("http://www.w3.org/2000/01/rdf-schema#label"), :o])
-                             .where([rsc_uri, :p, RDF::URI.new("http://www.semanticweb.org/rawfie/samant/omn-domain-uxv#UxV")],
-                                    [rsc_uri, RDF::URI.new("http://www.semanticweb.org/rawfie/samant/omn-domain-sensor#hasSensorSystem"), :s],
-                                    [:s, RDF::URI.new("http://www.semanticweb.org/rawfie/samant/omn-domain-sensor#hasID"), :o]
-                             )
+        if rsc.hasSensorSystem
+          global_writer << sparql
+                               .construct([RDF::URI.new(hw2), RDF::URI.new("http://www.w3.org/1999/02/22-rdf-syntax-ns#type"), RDF::URI.new("http://open-multinet.info/ontology/omn-resource#HardwareType")],
+                                          [RDF::URI.new(hw2), RDF::URI.new("http://www.w3.org/2000/01/rdf-schema#label"), :o],
+                                          [resource_fix, RDF::URI.new("http://open-multinet.info/ontology/omn-resource#hasHardwareType"), RDF::URI.new(hw2)]
+                               )
+                               .where([rsc_uri, :p, RDF::URI.new("http://www.semanticweb.org/rawfie/samant/omn-domain-uxv#UxV")],
+                                      [rsc_uri, RDF::URI.new("http://www.semanticweb.org/rawfie/samant/omn-domain-sensor#hasSensorSystem"), :s],
+                                      [:s, RDF::URI.new("http://www.semanticweb.org/rawfie/samant/omn-domain-sensor#hasID"), :o]
+                               )
+        end
         # Locations
         global_writer << sparql
                              .construct([rsc_uri, RDF::URI.new("http://www.w3.org/1999/02/22-rdf-syntax-ns#type"), RDF::URI.new("http://open-multinet.info/ontology/omn-resource#Location")],
