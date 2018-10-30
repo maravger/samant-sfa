@@ -1480,7 +1480,7 @@ module OMF::SFA::AM
         begin
           lease_properties = {:startTime => Time.parse(lease_el[:valid_from]).utc, :expirationTime => Time.parse(lease_el[:valid_until]).utc}
           debug "Lease time properties: " + lease_properties.inspect
-          if (Time.now >= lease_properties[:startTime]) || lease_properties[:startTime] >= lease_properties[:expirationTime]
+          if (Time.now >= lease_properties[:expirationTime]) || lease_properties[:startTime] >= lease_properties[:expirationTime]
             raise ArgumentError
           end
         rescue ArgumentError
