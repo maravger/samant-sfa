@@ -240,6 +240,7 @@ module OMF::SFA::AM::Rest
     # currently works only for advertisement (offering) rspecs
 
     def self.rspecker(resources, type)
+      debug "resources " + resources.inspect
       timestamp = Time.now.getutc
       sparql = SPARQL::Client.new($repository)
       uuid = ("urn:uuid:" + SecureRandom.uuid).to_sym # Rspec urn
