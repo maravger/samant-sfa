@@ -340,9 +340,9 @@ module OMF::SFA::AM
       return true if SAMANT::Lease.count == 0
       debug "No. of Leases = " + SAMANT::Lease.count.to_s
       parent = component.hasParent #hasSliceID == get_nil_account().urn ? component : component.hasParent
-       debug "LITTLE BUBI = " + component.to_uri.to_s
-       debug "DADDY = " + parent.to_uri.to_s
-       debug "LOCAL PARENT = " + parent.inspect + " " + parent.hasSliceID
+      debug "LITTLE BUBI = " + component.to_uri.to_s
+      debug "DADDY = " + parent.to_uri.to_s
+      debug "LOCAL PARENT = " + parent.inspect + " " + parent.hasSliceID
       # Assume that Accepted & Active states is Allocated & Provisioned respectively
       # TODO not sure if it covers all the possible lease overlaps
       leases = SAMANT::Lease.find(:all, :conditions => { :isReservationOf => parent.to_uri } )

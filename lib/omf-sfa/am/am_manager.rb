@@ -769,6 +769,7 @@ module OMF::SFA::AM
       else
         # raise InsufficientPrivilegesException unless slice_urn == authorizer.account[:urn] || authorizer.account[:urn] == "urn:publicid:IDN+omf:netmode+account+__default__"
         res = SAMANT::Uxv.find(:all, :conditions => {:hasSliceID => slice_urn})
+        debug "returned resources: " + res.inspect
       end
       res.map do |r|
         # Check for Interfaces & Sensors & Locations (Used in Rspec)
