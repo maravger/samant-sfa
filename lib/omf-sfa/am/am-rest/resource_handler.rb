@@ -250,6 +250,9 @@ module OMF::SFA::AM::Rest
       global_writer = []
       global_writer << rlabel_g << rtype_g
 
+      resources.delete_if {|res|
+        res.nil?
+      }
       resources.collect { |rsc|
         # Each UxV !MUST! provide the exact following two Hardware Types:
         hw1 = ("urn:uuid:" + SecureRandom.uuid).to_sym # UxV Hardware Type urn
