@@ -38,6 +38,7 @@ The first step is to clone the SAM repository
     $ git clone -b omn/wip https://github.com/nikoskal/samant.git
     $ mv samant omf_sfa
     $ cd omf_sfa
+    $ mkdir ready4translation
     $ export OMF_SFA_HOME=`pwd`
     $ bundle install
 
