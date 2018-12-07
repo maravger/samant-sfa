@@ -372,20 +372,21 @@ module OMF::SFA::AM::RPC::V3
       value[:geni_urn] = slice_urn
       value[:geni_slivers] = []
       # TODO check how to get the leases
-      # leases.each do |lease|
-      #   tmp = {}
-      #   debug "5 lease: " + lease.inspect
-      #   lease = SAMANT::Lease.for(lease.to_s)
-      #   tmp[:geni_sliver_urn]         = lease.hasSliceID
-      #   tmp[:geni_expires]            = lease.expirationTime.to_s
-      #   tmp[:geni_allocation_status]  = lease.hasStatusMessage
-      #   value[:geni_slivers] << tmp
-      # end
+      leases.each do |lease|
+        tmp = {}
+        debug "5 lease: " + lease.inspect
+        lease = SAMANT::Lease.for(lease.to_s)
+        tmp[:geni_sliver_urn]         = lease.hasSliceID
+        tmp[:geni_expires]            = lease.expirationTime.to_s
+        tmp[:geni_allocation_status]  = lease.hasStatusMessage
+        value[:geni_slivers] << tmp
+      end
 
       if compressed
         res = Base64.encode64(Zlib::Deflate.deflate(translated))
       end
 
+      debug "!!! 6: returned struct: " + value.inspect
       @return_struct[:code][:geni_code] = 0
       @return_struct[:value] = value
       @return_struct[:output] = ''
