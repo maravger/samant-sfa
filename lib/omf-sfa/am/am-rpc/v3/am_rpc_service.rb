@@ -377,9 +377,12 @@ module OMF::SFA::AM::RPC::V3
         debug "5 lease: " + lease.inspect
         debug "uri: " + lease.to_uri.to_s
         lease = SAMANT::Lease.for(lease.to_uri)
-        tmp[:geni_sliver_urn]         = lease.hasSliceID
+        # tmp[:geni_allocation_status]  = lease.hasStatusMessage
+        tmp[:geni_allocation_status]  = "geni_allocated"
+        tmp[:geni_error]              = ""
         tmp[:geni_expires]            = lease.expirationTime.to_s
-        tmp[:geni_allocation_status]  = lease.hasStatusMessage
+        tmp[:geni_operational_status] = "geni_pending_allocation"
+        tmp[:geni_sliver_urn]         = lease.hasSliceID
         value[:geni_slivers] << tmp
       end
 
