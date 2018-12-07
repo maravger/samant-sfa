@@ -375,7 +375,8 @@ module OMF::SFA::AM::RPC::V3
       leases.each do |lease|
         tmp = {}
         debug "5 lease: " + lease.inspect
-        lease = SAMANT::Lease.for(lease.to_s)
+        debug "uri: " + lease.to_uri.to_s
+        lease = SAMANT::Lease.for(lease.to_uri)
         tmp[:geni_sliver_urn]         = lease.hasSliceID
         tmp[:geni_expires]            = lease.expirationTime.to_s
         tmp[:geni_allocation_status]  = lease.hasStatusMessage
