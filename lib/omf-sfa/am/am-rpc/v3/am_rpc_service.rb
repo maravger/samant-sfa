@@ -220,9 +220,11 @@ module OMF::SFA::AM::RPC::V3
       debug "call java cmd: " +command_name
       result = `java -jar ./lib/omf-sfa/am/am-rpc/omn_translator/omnlib-jar-with-dependencies.jar -o manifest -i #{filename}`
       debug " translated "
+      debug result
       result.sub! 'sliver_id', 'component_id'
       result.sub! 'leaseID', 'id'
       new_result = Nokogiri::XML(result)
+      debug new_result.inspect
       new_result.at('node').add_child("<ns6:lease_ref id_ref=" + new_result.at('node').next.next.attributes['id'].value + "/>")
       new_result = new_result.to_xml
       debug new_result
