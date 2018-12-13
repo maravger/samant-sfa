@@ -204,7 +204,7 @@ module OMF::SFA::AM::RPC::V3
       result = `java -jar ./lib/omf-sfa/am/am-rpc/omn_translator/omnlib-jar-with-dependencies.jar -o advertisement -i #{filename}`
       debug " translated "
       new_result = Nokogiri::XML(result)
-      doc.at('node').add_child("<ns6:lease_ref id_ref=" + doc.at('node').next.next.attributes['id'].value + "/>")
+      new_result.at('node').add_child("<ns6:lease_ref id_ref=" + new_result.at('node').next.next.attributes['id'].value + "/>")
       new_result = new_result.to_xml
       debug new_result
       new_result
@@ -221,7 +221,7 @@ module OMF::SFA::AM::RPC::V3
       result.sub! 'sliver_id', 'component_id'
       result.sub! 'leaseID', 'id'
       new_result = Nokogiri::XML(result)
-      doc.at('node').add_child("<ns6:lease_ref id_ref=" + doc.at('node').next.next.attributes['id'].value + "/>")
+      new_result.at('node').add_child("<ns6:lease_ref id_ref=" + new_result.at('node').next.next.attributes['id'].value + "/>")
       new_result = new_result.to_xml
       debug new_result
       new_result
