@@ -203,8 +203,11 @@ module OMF::SFA::AM::RPC::V3
       debug "call java cmd: " +command_name
       result = `java -jar ./lib/omf-sfa/am/am-rpc/omn_translator/omnlib-jar-with-dependencies.jar -o advertisement -i #{filename}`
       debug " translated "
-      debug result
-      result
+      new_result = Nokogiri::XML(result)
+      doc.at('node').add_child("<ns6:lease_ref id_ref=" + doc.at('node').next.next.attributes['id'].value + "/>")
+      new_result = new_result.to_xml
+      debug new_result
+      new_result
     end
 
 
@@ -217,8 +220,11 @@ module OMF::SFA::AM::RPC::V3
       debug " translated "
       result.sub! 'sliver_id', 'component_id'
       result.sub! 'leaseID', 'id'
-      debug result
-      result
+      new_result = Nokogiri::XML(result)
+      doc.at('node').add_child("<ns6:lease_ref id_ref=" + doc.at('node').next.next.attributes['id'].value + "/>")
+      new_result = new_result.to_xml
+      debug new_result
+      new_result
     end
 
 
@@ -382,6 +388,7 @@ module OMF::SFA::AM::RPC::V3
         tmp[:geni_error]              = ""
         tmp[:geni_expires]            = lease.expirationTime.to_s
         tmp[:geni_operational_status] = "geni_pending_allocation"
+        # TODO check returned Slice ID, should be sliver urn
         tmp[:geni_sliver_urn]         = lease.hasSliceID
         value[:geni_slivers] << tmp
       end
