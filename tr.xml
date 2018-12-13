@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ns2:rspec generated="2018-12-13T14:31:43.351+02:00" generated_by="omnlib" expires="2018-12-13T14:31:43.351+02:00" type="advertisement" xmlns="http://www.geni
+.net/resources/rspec/ext/openflow/4" xmlns:ns2="http://www.geni.net/resources/rspec/3" xmlns:ns4="http://nitlab.inf.uth.gr/schema/sfa/rspec/1" xmlns:ns3="http
+://www.protogeni.net/resources/rspec/ext/emulab/1" xmlns:ns6="http://www.geni.net/resources/rspec/ext/opstate/1" xmlns:ns5="http://www.geni.net/resources/rspe
+c/ext/shared-vlan/1" xmlns:ns8="http://open-multinet.info/ontology/resource/acs" xmlns:ns7="http://www.geni.net/resources/rspec/ext/stitch/2/" xmlns:ns13="htt
+p://demo.fiteagle.org/pc" xmlns:ns9="http://open-multinet.info/ontology/resource/epc" xmlns:ns12="http://opensdncore.org/ontology/" xmlns:ns11="http://monitor
+ing.service.tu-berlin.de/monitoring" xmlns:ns10="http://open-multinet.info/ontology/resource/fiveg">
+  <ns2:node component_id="urn:publicid:IDN+hai+Uxv+hai.wizzit.venac.4" component_manager_id="urn:uuid:DUMMY_AUTHORITY" component_name="hai.wizzit.venac.4" exclusive="true">
+    <ns2:hardware_type name="hai.wizzit.venac.4"/>
+    <ns2:available now="false"/>
+    <ns2:interface component_id="urn:publicid:IDN+hai+wireless_interface+hai.wizzit.venac.4.wizzit_wifi:wlan0" component_name="hai.wizzit.venac.4.wizzit_wifi:wlan0" role="primary"/>
+  </ns2:node>
+  <ns4:lease id="eef79a2b-3075-4740-b828-8bc3c1b2fb5b" valid_from="2018-12-13T14:30:00.000Z" valid_until="2018-12-13T14:40:00.000Z"/>
+</ns2:rspec>
