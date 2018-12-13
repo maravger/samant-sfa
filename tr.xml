@@ -3,5 +3,5 @@
 <ns5:node component_manager_id="urn:uuid:DUMMY_AUTHORITY" component_name="hai.wizzit.venac.4" exclusive="true" sliver_id="urn:publicid:IDN+hai+Uxv+hai.wizzit.venac.4">
   <ns5:hardware_type name="hai.wizzit.venac.4"/>
 </ns5:node>
-<ns13:lease leaseID="a7fdae6b-3064-40ff-8801-c17191c21f03" slice_id="urn:publicid:IDN+rawfie:ntuatesting56+slice+gdfgdfgdf" valid_from="2018-12-13T16:30:00.000Z" valid_until="2018-12-13T16:40:00.000Z"/>
+<ns13:lease id="a7fdae6b-3064-40ff-8801-c17191c21f03" slice_id="urn:publicid:IDN+rawfie:ntuatesting56+slice+gdfgdfgdf" valid_from="2018-12-13T16:30:00.000Z" valid_until="2018-12-13T16:40:00.000Z"/>
 </ns5:rspec>
