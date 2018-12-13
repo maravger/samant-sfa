@@ -206,7 +206,8 @@ module OMF::SFA::AM::RPC::V3
       debug result
       new_result = Nokogiri::XML(result)
       debug new_result.inspect
-      new_result.at('node').add_child("<ns3:lease_ref id_ref=" + new_result.at('node').next.next.attributes['id'].value + "/>")
+      # new_result.at('node').add_child("<ns3:lease_ref id_ref=" + new_result.at('node').next.next.attributes['id'].value + "/>")
+      new_result.doc.children.first.children[1].add_child("<ns3:lease_ref id_ref=" + new_result.doc.children.first.children[4].next.next.attributes['id'].value + "/>")
       new_result = new_result.to_xml
       debug new_result
       new_result
@@ -225,7 +226,7 @@ module OMF::SFA::AM::RPC::V3
       result.sub! 'leaseID', 'id'
       new_result = Nokogiri::XML(result)
       debug new_result.inspect
-      new_result.at('//ns2:node').add_child("<ns3:lease_ref id_ref=" + new_result.at('//ns2:node').next.next.attributes['id'].value + "/>")
+      new_result.doc.children.first.children[1].add_child("<ns3:lease_ref id_ref=" + new_result.doc.children.first.children[4].next.next.attributes['id'].value + "/>")
       new_result = new_result.to_xml
       debug new_result
       new_result
