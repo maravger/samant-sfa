@@ -1,14 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<ns2:rspec generated="2018-12-13T14:31:43.351+02:00" generated_by="omnlib" expires="2018-12-13T14:31:43.351+02:00" type="advertisement" xmlns="http://www.geni
-.net/resources/rspec/ext/openflow/4" xmlns:ns2="http://www.geni.net/resources/rspec/3" xmlns:ns4="http://nitlab.inf.uth.gr/schema/sfa/rspec/1" xmlns:ns3="http
-://www.protogeni.net/resources/rspec/ext/emulab/1" xmlns:ns6="http://www.geni.net/resources/rspec/ext/opstate/1" xmlns:ns5="http://www.geni.net/resources/rspe
-c/ext/shared-vlan/1" xmlns:ns8="http://open-multinet.info/ontology/resource/acs" xmlns:ns7="http://www.geni.net/resources/rspec/ext/stitch/2/" xmlns:ns13="htt
-p://demo.fiteagle.org/pc" xmlns:ns9="http://open-multinet.info/ontology/resource/epc" xmlns:ns12="http://opensdncore.org/ontology/" xmlns:ns11="http://monitor
-ing.service.tu-berlin.de/monitoring" xmlns:ns10="http://open-multinet.info/ontology/resource/fiveg">
-  <ns2:node component_id="urn:publicid:IDN+hai+Uxv+hai.wizzit.venac.4" component_manager_id="urn:uuid:DUMMY_AUTHORITY" component_name="hai.wizzit.venac.4" exclusive="true">
-    <ns2:hardware_type name="hai.wizzit.venac.4"/>
-    <ns2:available now="false"/>
-    <ns2:interface component_id="urn:publicid:IDN+hai+wireless_interface+hai.wizzit.venac.4.wizzit_wifi:wlan0" component_name="hai.wizzit.venac.4.wizzit_wifi:wlan0" role="primary"/>
-  </ns2:node>
-  <ns4:lease id="eef79a2b-3075-4740-b828-8bc3c1b2fb5b" valid_from="2018-12-13T14:30:00.000Z" valid_until="2018-12-13T14:40:00.000Z"/>
-</ns2:rspec>
+<ns5:rspec generated="2018-12-13T17:31:30.568+02:00" generated_by="omnlib" type="manifest" xmlns="http://open-multinet.info/ontology/resource/epc" xmlns:ns2="http://open-multinet.info/ontology/resource/acs" xmlns:ns4="http://open-multinet.info/ontology/resource/fiveg" xmlns:ns3="http://www.protogeni.net/resources/rspec/ext/emulab/1" xmlns:ns6="http://opensdncore.org/ontology/" xmlns:ns5="http://www.geni.net/resources/rspec/3" xmlns:ns8="http://groups.geni.net/exogeni/attachment/wiki/RspecExtensions/slice-info/1" xmlns:ns7="http://demo.fiteagle.org/reservation" xmlns:ns13="http://nitlab.inf.uth.gr/schema/sfa/rspec/1" xmlns:ns9="http://groups.geni.net/exogeni/attachment/wiki/RspecExtensions/sliver-info/1" xmlns:ns12="http://www.geni.net/resources/rspec/ext/postBootScript/1" xmlns:ns11="http://jfed.iminds.be/proxy/1.0" xmlns:ns10="http://monitoring.service.tu-berlin.de/monitoring">
+<ns5:node component_manager_id="urn:uuid:DUMMY_AUTHORITY" component_name="hai.wizzit.venac.4" exclusive="true" sliver_id="urn:publicid:IDN+hai+Uxv+hai.wizzit.venac.4">
+  <ns5:hardware_type name="hai.wizzit.venac.4"/>
+</ns5:node>
+<ns13:lease leaseID="a7fdae6b-3064-40ff-8801-c17191c21f03" slice_id="urn:publicid:IDN+rawfie:ntuatesting56+slice+gdfgdfgdf" valid_from="2018-12-13T16:30:00.000Z" valid_until="2018-12-13T16:40:00.000Z"/>
+</ns5:rspec>
