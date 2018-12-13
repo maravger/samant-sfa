@@ -203,6 +203,7 @@ module OMF::SFA::AM::RPC::V3
       debug "call java cmd: " +command_name
       result = `java -jar ./lib/omf-sfa/am/am-rpc/omn_translator/omnlib-jar-with-dependencies.jar -o advertisement -i #{filename}`
       debug " translated "
+      debug result
       new_result = Nokogiri::XML(result)
       debug new_result
       new_result.at('node').add_child("<ns6:lease_ref id_ref=" + new_result.at('node').next.next.attributes['id'].value + "/>")
