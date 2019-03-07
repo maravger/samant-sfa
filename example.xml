@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><ns2:rspec xmlns="http://www.geni.net/resources/rspec/ext/openflow/4" xmlns:ns2="http://www.geni.net/resources/rspec/3" xmlns:ns4="http://www.geni.net/resourc
+es/rspec/ext/opstate/1" xmlns:ns3="http://www.geni.net/resources/rspec/ext/shared-vlan/1" xmlns:ns6="http://www.protogeni.net/resources/rspec/ext/emulab/1" xm
+lns:ns5="http://www.geni.net/resources/rspec/ext/stitch/2/" xmlns:ns8="http://open-multinet.info/ontology/resource/acs" xmlns:ns7="http://nitlab.inf.uth.gr/sc
+hema/sfa/rspec/1" xmlns:ns13="http://demo.fiteagle.org/pc" xmlns:ns9="http://open-multinet.info/ontology/resource/epc" xmlns:ns12="http://opensdncore.org/onto
+logy/" xmlns:ns11="http://monitoring.service.tu-berlin.de/monitoring" xmlns:ns10="http://open-multinet.info/ontology/resource/fiveg" generated="2019-03-07T16:
+48:22.717+02:00" generated_by="omnlib" expires="2019-03-07T16:48:22.717+02:00" type="advertisement">
+    <ns2:node component_id="urn:publicid:IDN+samant+auv+altus3" component_manager_id="urn:uuid:DUMMY_AUTHORITY" component_name="AuV_ALTUS3" exclusive="true">
+        <ns2:hardware_type name="AuV3MS345"/>
+        <ns2:hardware_type name="AuV_ALTUS3"/>
+        <ns2:location country="DUMMY_COUNTRYCODE" longitude="1.13552e2" latitude="4.1701e1"/>
+        <ns2:available now="true"/>
+        <ns2:interface component_id="urn:uuid:interface+1+wired+auv3:eth0" component_name="auv3:eth0" role="experimental"/>
+    </ns2:node>
+    <ns2:node component_id="urn:publicid:IDN+samant+auv+altus2" component_manager_id="urn:uuid:DUMMY_AUTHORITY" component_name="AuV_ALTUS2" exclusive="true">
+        <ns2:hardware_type name="AuV_ALTUS2"/>
+        <ns2:hardware_type name="AuV2MS345"/>
+        <ns2:location country="DUMMY_COUNTRYCODE" longitude="1.03552e2" latitude="3.1701e1"/>
+        <ns2:available now="true"/>
+        <ns2:interface component_id="urn:uuid:interface+1+wired+auv2:eth0" component_name="auv2:eth0" role="experimental"/>
+    </ns2:node>
+    <ns2:node component_id="urn:publicid:IDN+samant+uav+flexus1" component_manager_id="urn:uuid:DUMMY_AUTHORITY" component_name="UaV_FLEXUS1" exclusive="true"
+>
+        <ns2:hardware_type name="UaV1MS345"/>
+        <ns2:hardware_type name="UaV_FLEXUS1"/>
+        <ns2:location country="DUMMY_COUNTRYCODE" longitude="1.2552e1" latitude="5.5701e1"/>
+        <ns2:available now="true"/>
+        <ns2:interface component_id="urn:uuid:interface+1+wired+uav1:eth0" component_name="uav1:eth0" role="experimental"/>
+    </ns2:node>
+    <ns2:node component_id="urn:publicid:IDN+samant+ugv+altus1" component_manager_id="urn:uuid:DUMMY_AUTHORITY" component_name="UgV_ALTUS1" exclusive="true">
+        <ns2:hardware_type name="AuV3MS345"/>
+        <ns2:hardware_type name="UgV_ALTUS1"/>
+        <ns2:location country="DUMMY_COUNTRYCODE" longitude="1.13552e2" latitude="4.1701e1"/>
+        <ns2:available now="true"/>
+        <ns2:interface component_id="urn:uuid:interface+1+wired+gv1:bt0" component_name="gv1:bt0" role="experimental"/>
+    </ns2:node>
+    <ns2:node component_id="urn:publicid:IDN+hai+Uxv+hai.wizzit.venac.5" component_manager_id="urn:uuid:DUMMY_AUTHORITY" component_name="hai.wizzit.venac.5" e
+xclusive="true">
+<ns2:hardware_type name="hai.wizzit.venac.5"/>
+        <ns2:available now="true"/>
+        <ns2:interface component_id="urn:publicid:IDN+hai+wireless_interface+hai.wizzit.venac.5.wizzit_wifi:wlan0" component_name="hai.wizzit.venac.5.wizzit_wifi:wlan0" role="primary"/>
+    </ns2:node>
+    <ns2:node component_id="urn:publicid:IDN+hai+Uxv+hai.wizzit.venac.4" component_manager_id="urn:uuid:DUMMY_AUTHORITY" component_name="hai.wizzit.venac.4" exclusive="true">
+        <ns2:hardware_type name="hai.wizzit.venac.4"/>
+        <ns2:available now="true"/>
+        <ns2:interface component_id="urn:publicid:IDN+hai+wireless_interface+hai.wizzit.venac.4.wizzit_wifi:wlan0" component_name="hai.wizzit.venac.4.wizzit_wifi:wlan0" role="primary"/>
+    </ns2:node>
+    <ns2:node component_id="urn:publicid:IDN+samant+auv+altus1" component_manager_id="urn:uuid:DUMMY_AUTHORITY" component_name="AuV_ALTUS1" exclusive="true">
+        <ns2:hardware_type name="AuV_ALTUS1"/>
+        <ns2:hardware_type name="AuV1MS345"/>
+        <ns2:location country="DUMMY_COUNTRYCODE" longitude="9.355200000000001e1" latitude="2.1701e1"/>
+        <ns2:available now="true"/>
+        <ns2:interface component_id="urn:uuid:interface+1+wired+auv1:eth0" component_name="auv1:eth0" role="experimental"/>
+    </ns2:node>
+    <ns2:node component_id="urn:publicid:IDN+samant+uxv+netmode40" component_manager_id="urn:uuid:DUMMY_AUTHORITY" component_name="netmode40" exclusive="true">
+        <ns2:hardware_type name="d33ca12d-dde2-4243-beae-60d761a39a6f"/>
+        <ns2:hardware_type name="netmode40"/>
+        <ns2:available now="true"/>
+        <ns2:interface component_id="urn:publicid:IDN+samant+wireless_interface+uav1:wlan1100" component_name="uav1:wlan1100" role="experimental"/>
+        <ns2:interface component_id="urn:publicid:IDN+samant+wired_interface+uav1:eth1600" component_name="uav1:eth160" role="experimental"/>
+    </ns2:node>
+    <ns2:node component_id="urn:publicid:IDN+hai+Uxv+hai.wizzit.venac.2" component_manager_id="urn:uuid:DUMMY_AUTHORITY" component_name="hai.wizzit.venac.2" exclusive="true">
+        <ns2:hardware_type name="hai.wizzit.venac.2"/>
+        <ns2:available now="true"/>
+        <ns2:interface component_id="urn:publicid:IDN+hai+wireless_interface+hai.wizzit.venac.2.wizzit_wifi:wlan0" component_name="hai.wizzit.venac.2.wizzit_wifi:wlan0" role="primary"/>
+    </ns2:node>
+    <ns7:lease id="8ea2043c-64b9-46f3-93a1-73c8d6766660" valid_from="2019-04-04T15:19:00.000Z" valid_until="2019-04-04T15:49:00.000Z"/>
+</ns2:rspec>
