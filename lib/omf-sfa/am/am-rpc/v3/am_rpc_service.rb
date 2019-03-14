@@ -212,8 +212,8 @@ module OMF::SFA::AM::RPC::V3
       # lease_ref.namespace = new_result.root.namespace_definitions.find{|ns| ns.href=="http://nitlab.inf.uth.gr/schema/sfa/rspec/1"}
       # new_result.children.first.children[1].add_child(lease_ref)
       new_result = new_result.to_xml
-      # debug new_result
-      new_result.to_xml
+      debug new_result
+      new_result
     end
 
 
