@@ -173,7 +173,7 @@ module OMF::SFA::AM::RPC::V3
         translated = translate_omn_rspec(filename)
         debug "3 translated: " + translated.inspect
 
-
+        # debug "to xml: " + translated.to_xml(:indent => 5, :encoding => 'UTF-8')
         # res = OMF::SFA::AM::Rest::ResourceHandler.omn_response_json(resources, options) # -> returns the json formatted results (more detailed, omn enriched)
         # TODO insert identifier to res so to distinguish advertisement from request from manifest etc. (see also am_rpc_service)
       end
@@ -184,8 +184,9 @@ module OMF::SFA::AM::RPC::V3
       #   end
 
       @return_struct[:code][:geni_code] = 0
-      @return_struct[:value] = translated
+      @return_struct[:value] = translated.to_xml(:indent => 5, :encoding => 'UTF-8')
       @return_struct[:output] = ''
+      # puts @return_struct.to_yaml
       return @return_struct
     rescue OMF::SFA::AM::InsufficientPrivilegesException => e
       @return_struct[:code][:geni_code] = 3
@@ -197,7 +198,6 @@ module OMF::SFA::AM::RPC::V3
 
 
     def translate_omn_rspec(filename)
-
       puts 'omn for translation :' + filename.to_s
       command_name = "java -jar ./lib/omf-sfa/am/am-rpc/omn_translator/omnlib-jar-with-dependencies.jar -o advertisement -i #{filename}"
       debug "call java cmd: " +command_name
@@ -213,12 +213,11 @@ module OMF::SFA::AM::RPC::V3
       # new_result.children.first.children[1].add_child(lease_ref)
       # new_result = new_result.to_xml
       # debug new_result
-      new_result
+      new_result.to_xml
     end
 
 
     def translate_manifest_omn_rspec(filename)
-
       puts 'manifest omn for translation :' + filename.to_s
       command_name = "java -jar ./lib/omf-sfa/am/am-rpc/omn_translator/omnlib-jar-with-dependencies.jar -o manifest -i #{filename}"
       debug "call java cmd: " +command_name

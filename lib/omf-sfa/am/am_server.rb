@@ -46,6 +46,7 @@ module OMF::SFA::AM
     def load_trusted_cert_roots
 
       trusted_roots = File.expand_path(@@rpc[:trusted_roots])
+      puts Dir.entries(trusted_roots)
       certs = Dir.entries(trusted_roots)
       certs.delete("..")
       certs.delete(".")
