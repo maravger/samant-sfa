@@ -184,7 +184,7 @@ module OMF::SFA::AM::RPC::V3
       #   end
 
       @return_struct[:code][:geni_code] = 0
-      @return_struct[:value] = translated.to_xml(:indent => 5, :encoding => 'UTF-8')
+      @return_struct[:value] = translated
       @return_struct[:output] = ''
       # puts @return_struct.to_yaml
       return @return_struct
@@ -211,9 +211,9 @@ module OMF::SFA::AM::RPC::V3
       # lease_ref["id_ref"] = new_result.children.first.children[3].attributes['id'].value
       # lease_ref.namespace = new_result.root.namespace_definitions.find{|ns| ns.href=="http://nitlab.inf.uth.gr/schema/sfa/rspec/1"}
       # new_result.children.first.children[1].add_child(lease_ref)
-      new_result = new_result.to_xml
-      debug new_result
-      new_result
+      # new_result = new_result.to_xml
+      # debug new_result
+      new_result.to_xml(:indent => 5, :encoding => 'UTF-8')
     end
 
 
