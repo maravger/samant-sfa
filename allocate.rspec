@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<rspec type="request" xmlns="http://www.geni.net/resources/rspec/3" xmlns:ol="http://nitlab.inf.uth.gr/schema/sfa/rspec/1" xmlns:omf="http://schema.mytestbed.net/sfa/rspec/1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.geni.net/resources/rspec/3 http://www.geni.net/resources/rspec/3/request.xsd http://nitlab.inf.uth.gr/schema/sfa/rspec/1 http://nitlab.inf.uth.gr/schema/sfa/rspec/1/request-reservation.xsd">
+<ol:lease client_id="d3daa057-ea6f-42f9-b6dc-18d5bf074204" valid_from="2019-03-27T10:15:10Z" valid_until="2019-03-27T10:25:10Z"/>
+<node component_id="urn:publicid:IDN+hai+Uxv+hai.wizzit.venac.4" component_manager_id="urn:uuid:DUMMY_AUTHORITY" component_name="hai.wizzit.venac.4" exclusive="true" client_id="hai.wizzit.venac.4">
+<ol:lease_ref id_ref="d3daa057-ea6f-42f9-b6dc-18d5bf074204"/>
+</node>
+<node component_id="urn:publicid:IDN+hai+Uxv+hai.wizzit.venac.2" component_manager_id="urn:uuid:DUMMY_AUTHORITY" component_name="hai.wizzit.venac.2" exclusive="true" client_id="hai.wizzit.venac.2">
+<ol:lease_ref id_ref="d3daa057-ea6f-42f9-b6dc-18d5bf074204"/>
+</node>
+</rspec>

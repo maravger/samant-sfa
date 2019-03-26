@@ -714,29 +714,54 @@ module OMF::SFA::AM::RPC::V3
         nodes = descr_el.xpath('//xmlns:node')
         debug "nodes inspect:"
         debug nodes.inspect
-        node_values[:component_id] = nodes.attribute('component_id').value
-        node_values[:component_manager_id] = nodes.attribute('component_manager_id').value
-        node_values[:component_name] = nodes.attribute('component_name').value
-        node_values[:exclusive] = nodes.attribute('exclusive').value
-        node_values[:client_id] = nodes.attribute('client_id').value
 
-        debug "node.children"
-        debug nodes.children.inspect # Get the list of children of this node as a NodeSet
-        # debug nodes.children=(:lease_ref).inspect
-
-        debug nodes.children.length
-
+        # ----- SAMANT addition ------
+        lease_ref = ""
         nodes.children.each do |node|
-          # debug node.inspect
-          # debug node.attributes.inspect
           debug node.attribute('id_ref').inspect
           unless node.attribute('id_ref').nil?
-            node_values[:lease_ref] = node.attribute('id_ref').value
+            lease_ref = node.attribute('id_ref').value
             break
           end
         end
 
-        resources_hash[:nodes] = [node_values]
+        resources_hash[:nodes] = []
+        descr_el.xpath('//xmlns:node').collect do |el|
+          if el.kind_of?(Nokogiri::XML::Element)
+            resources_hash[:nodes] << {
+                "component_id" => el.attribute('component_id').value,
+                "component_manager_id" => el.attribute('component_manager_id').value,
+                "component_name" => el.attribute('component_name').value,
+                "exclusive" => el.attribute('exclusive').value,
+                "lease_ref" => lease_ref
+            }
+          end
+        end
+
+        # ----------------------------
+        # node_values[:component_id] = nodes.attribute('component_id').value
+        # node_values[:component_manager_id] = nodes.attribute('component_manager_id').value
+        # node_values[:component_name] = nodes.attribute('component_name').value
+        # node_values[:exclusive] = nodes.attribute('exclusive').value
+        # node_values[:client_id] = nodes.attribute('client_id').value
+        #
+        # debug "node.children"
+        # debug nodes.children.inspect # Get the list of children of this node as a NodeSet
+        # # debug nodes.children=(:lease_ref).inspect
+
+        # debug nodes.children.length
+
+        # nodes.children.each do |node|
+        #   # debug node.inspect
+        #   # debug node.attributes.inspect
+        #   debug node.attribute('id_ref').inspect
+        #   unless node.attribute('id_ref').nil?
+        #     node_values[:lease_ref] = node.attribute('id_ref').value
+        #     break
+        #   end
+        # end
+
+        # resources_hash[:nodes] = [node_values]
         debug "resources_hash"
         debug resources_hash.inspect
       end
