@@ -729,11 +729,11 @@ module OMF::SFA::AM::RPC::V3
         descr_el.xpath('//xmlns:node').collect do |el|
           if el.kind_of?(Nokogiri::XML::Element)
             resources_hash[:nodes] << {
-                "component_id" => el.attribute('component_id').value,
-                "component_manager_id" => el.attribute('component_manager_id').value,
-                "component_name" => el.attribute('component_name').value,
-                "exclusive" => el.attribute('exclusive').value,
-                "lease_ref" => lease_ref
+                :component_id => el.attribute('component_id').value,
+                :component_manager_id => el.attribute('component_manager_id').value,
+                :component_name => el.attribute('component_name').value,
+                :exclusive => el.attribute('exclusive').value,
+                :lease_ref => lease_ref
             }
           end
         end
