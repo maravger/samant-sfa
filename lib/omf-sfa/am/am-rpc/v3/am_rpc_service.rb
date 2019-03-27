@@ -258,18 +258,21 @@ module OMF::SFA::AM::RPC::V3
       end
       for lease in leases do
         id_ref = lease.attributes["id"].value
-        node_id = SAMANT::Lease.find(:all, :conditions => { :hasID => id_ref} ).first.isReservationOf.first.hasComponentID
-        puts "node_id: " + node_id
-        for node in nodes do
-          if node.attr("component_id") == node_id
-            n = node
-            break
+        leased_nodes = SAMANT::Lease.find(:all, :conditions => { :hasID => id_ref} ).first.isReservationOf
+        for node in leased_nodes do
+          node_id = node.hasComponentID
+          puts "node_id: " + node_id
+          for node in nodes do
+            if node.attr("component_id") == node_id
+              n = node
+              break
+            end
           end
+          lease_ref = Nokogiri::XML::Node.new("lease_ref", new_result)
+          lease_ref["id_ref"] = id_ref
+          lease_ref.namespace = lease_namespace
+          n.add_child(lease_ref)
         end
-        lease_ref = Nokogiri::XML::Node.new("lease_ref", new_result)
-        lease_ref["id_ref"] = id_ref
-        lease_ref.namespace = lease_namespace
-        n.add_child(lease_ref)
       end
       ####################
       debug "Translated Manifest" + new_result.to_s
