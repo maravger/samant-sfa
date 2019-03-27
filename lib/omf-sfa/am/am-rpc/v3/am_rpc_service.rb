@@ -248,7 +248,6 @@ module OMF::SFA::AM::RPC::V3
       result.gsub! 'sliver_id', 'component_id'
       result.gsub! 'leaseID', 'id'
       new_result = Nokogiri::XML(result)
-      debug "translated " + new_result.to_s
       lease_namespace = new_result.root.namespace_definitions.find{|ns| ns.href=="http://nitlab.inf.uth.gr/schema/sfa/rspec/1"}
       node_namespace = new_result.root.namespace_definitions.find{|ns| ns.href=="http://www.geni.net/resources/rspec/3"}
       leases = new_result.xpath("//" + lease_namespace.prefix + ":lease")
@@ -273,6 +272,7 @@ module OMF::SFA::AM::RPC::V3
         n.add_child(lease_ref)
       end
       ####################
+      debug "Translated Manifest" + new_result.to_s
       new_result.to_xml(:indent => 5, :encoding => 'UTF-8')
     end
 
