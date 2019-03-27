@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<rspec xmlns="http://www.geni.net/resources/rspec/3" xmlns:ns2="http://open-multinet.info/ontology/resource/epc" xmlns:ns4="http://www.protogeni.net/resources/rspec/ext/emulab/1" xmlns:ns3="http://open-multinet.info/ontology/resource/acs" xmlns:ns6="http://opensdncore.org/ontology/" xmlns:ns5="http://open-multinet.info/ontology/resource/fiveg" xmlns:ns8="http://groups.geni.net/exogeni/attachment/wiki/RspecExtensions/slice-info/1" xmlns:ns7="http://demo.fiteagle.org/reservation" xmlns:ns13="http://nitlab.inf.uth.gr/schema/sfa/rspec/1" xmlns:ns9="http://groups.geni.net/exogeni/attachment/wiki/RspecExtensions/sliver-info/1" xmlns:ns12="http://www.geni.net/resources/rspec/ext/postBootScript/1" xmlns:ns11="http://jfed.iminds.be/proxy/1.0" xmlns:ns10="http://monitoring.service.tu-berlin.de/monitoring" generated="2019-03-26T18:17:00.752+02:00" generated_by="omnlib" type="manifest">
+  <node component_manager_id="urn:uuid:DUMMY_AUTHORITY" component_name="hai.wizzit.venac.4" exclusive="true" component_id="urn:publicid:IDN+hai+Uxv+hai.wizzit.venac.4">
+    <hardware_type name="hai.wizzit.venac.4"/>
+  </node>
+  <node component_manager_id="urn:uuid:DUMMY_AUTHORITY" component_name="hai.wizzit.venac.2" exclusive="true" component_id="urn:publicid:IDN+hai+Uxv+hai.wizzit.venac.2">
+    <hardware_type name="hai.wizzit.venac.2"/>
+  </node>
+  <ns13:lease id="e479343c-75ab-4b3c-8372-510b4c610679" slice_id="urn:publicid:IDN+auth.rawfie.noc.onelab.eu:netmode+slice+test4" valid_from="2019-03-29T16:11:00.000Z" valid_until="2019-03-29T16:21:00.000Z"/>
+</rspec>

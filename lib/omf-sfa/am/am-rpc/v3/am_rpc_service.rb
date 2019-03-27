@@ -245,17 +245,35 @@ module OMF::SFA::AM::RPC::V3
       debug "call java cmd: " +command_name
       result = `java -jar ./lib/omf-sfa/am/am-rpc/omn_translator/omnlib-jar-with-dependencies.jar -o manifest -i #{filename}`
       debug " translated "
-      result.sub! 'sliver_id', 'component_id'
-      result.sub! 'leaseID', 'id'
+      result.gsub! 'sliver_id', 'component_id'
+      result.gsub! 'leaseID', 'id'
       new_result = Nokogiri::XML(result)
       debug "translated " + new_result.to_s
-      lease_ref = Nokogiri::XML::Node.new("lease_ref", new_result)
-      lease_ref["id_ref"] = new_result.children.first.children[3].attributes['id'].value
-      lease_ref.namespace = new_result.root.namespace_definitions.find{|ns| ns.href=="http://nitlab.inf.uth.gr/schema/sfa/rspec/1"}
-      new_result.children.first.children[1].add_child(lease_ref)
-      new_result = new_result.to_xml
-      debug new_result
-      new_result
+      lease_namespace = new_result.root.namespace_definitions.find{|ns| ns.href=="http://nitlab.inf.uth.gr/schema/sfa/rspec/1"}
+      node_namespace = new_result.root.namespace_definitions.find{|ns| ns.href=="http://www.geni.net/resources/rspec/3"}
+      leases = new_result.xpath("//" + lease_namespace.prefix + ":lease")
+      if node_namespace.prefix
+        nodes = new_result.xpath("//"+node_namespace.prefix+":node")
+      else
+        nodes = new_result.xpath("//xmlns:node")
+      end
+      for lease in leases do
+        id_ref = lease.attributes["id"].value
+        node_id = SAMANT::Lease.find(:all, :conditions => { :hasID => id_ref} ).first.isReservationOf.first.hasComponentID
+        puts "node_id: " + node_id
+        for node in nodes do
+          if node.attr("component_id") == node_id
+            n = node
+            break
+          end
+        end
+        lease_ref = Nokogiri::XML::Node.new("lease_ref", new_result)
+        lease_ref["id_ref"] = id_ref
+        lease_ref.namespace = lease_namespace
+        n.add_child(lease_ref)
+      end
+      ####################
+      new_result.to_xml(:indent => 5, :encoding => 'UTF-8')
     end
 
 
