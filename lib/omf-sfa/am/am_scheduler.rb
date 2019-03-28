@@ -469,6 +469,10 @@ module OMF::SFA::AM
       debug "add_samant_lease_events_on_event_scheduler: lease: #{lease.inspect}"
       t_now = Time.now
       l_uuid = lease.hasID
+      debug "...moving lease to a -pending- state"
+      lease = SAMANT::Lease.find(:all, :conditions => { :hasID => l_uuid} ).first
+      lease.hasReservationState = SAMANT::PENDING
+      lease.save
       if t_now >= lease.expirationTime
         debug "past lease"
         release_samant_lease(lease)
