@@ -35,7 +35,7 @@ Installation
 
 The first step is to clone the SAM repository
 
-    $ git clone -b omn/wip https://github.com/nikoskal/samant.git
+    $ git clone https://github.com/maravger/samant-sfa.git
     $ mv samant omf_sfa
     $ cd omf_sfa
     $ mkdir ready4translation
